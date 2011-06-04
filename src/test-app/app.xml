@@ -1,0 +1,42 @@
+<app xmlns="http://www.marklogic.com/mx" default-context="?">
+  <!-- passthru examples //-->
+  <path url="/resource/" type="passthru" description=""/>
+  <path url="/robots.txt" type="passthru" description=""/>
+  <path url="/static-test.html" type="passthru" description=""/>
+
+  <!-- basic http redirection //-->
+  <path url="/forward.test" type="forward" description="example of forwarding which does not change url">/static-test.html</path>
+  <path url="/redirect.test" type="redirect" description="example of redirecting, which changes url to redirected url">/static-test.html</path>
+
+  <!-- simple inline tests //-->
+  <path url="/inline.test" content-type="text/html" method="GET">
+    <html>
+      <body>
+        <h1>inline test</h1>
+      </body>
+    </html>
+  </path>
+  <path url="/inline2.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
+    <html>
+      <body>
+        <h1>inline test</h1>
+      </body>
+    </html>
+  </path>
+
+
+  <!-- examples of models //-->
+  <path url="/uris" method="GET" content-type="text/html" description="">{fn:collection('uri-collection')}</path>
+
+
+
+  <!-- default MX (required for MX build/test) //-->
+  <path url="/mx" method="GET" description="MX status page">
+    <html>
+      <body>
+        <h1>MX Status Page</h1>
+      </body>
+    </html>
+  </path>
+
+</app>

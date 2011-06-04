@@ -1,0 +1,106 @@
+MarkLogic XQuery framework (mx)
+-------------------------------
+
+MX is designed to provide a 'starting point' for developing MarkLogic XQuery web applications.
+
+
+
+Website
+-------
+
+Up-to-date documentation and source code can always be obtained from the MX github repo
+
+https://github.com/xquery/mx
+
+
+Dependency
+----------
+MarkLogic server is required, please refer to MarkLogic excellent documentation for getting 
+the server installed and initializing a database and related HTTP application server.
+
+MX uses xproc (Norman Walsh XMLCalabash) as build tool, in addition to providing a 
+
+
+Installation - For the impatient
+--------------------------------
+
+setup mydatabase (database and http server) on port 9000 
+
+run bin/mx-generate -p 9000 -d mydatabase -r /var/myapp/xquery
+
+change root directory for MarkLogic http server to /var/myapp/xquery
+
+test installation by browsing to http://localhost:9000/mx
+
+
+Installation
+-------------
+
+You need to first ensure you have a MarkLogic database and application server
+available 
+
+
+
+Once you have a working MarkLogic HTTP application server running then there are 2 options 
+for getting started with MX.
+
+
+I) Generate starter application (requires Java dependency)
+   
+   run bin/mx-generate -p http port -d database name -r root directory
+
+   The following example will generate a skeleton distribution in the /var/application/src/xquery/directory
+
+   ex.  bin/mx-generate -r /var/application/src/xquery/
+
+
+II) Manual installation
+
+    Copy app.xml and fx-controller.xqy to root HTTP application server directory. 
+
+    Copy fx.xqm to directory named 'lib' under root HTTP application server
+
+
+However way you installed it you should now test to see if all is working properly
+
+    ex. http://localhost:9000/mx
+
+
+
+
+
+
+Accessing API Documentation
+---------------------------
+Once you start developing with MX you will discover that documenting your interfaces become easier
+
+
+
+Resources
+---------
+
+MX github: http://www.github.com/xquery/mx
+
+XSGI: previous experiment for use with eXist XML Database
+
+Martin Fowler's Harvested Frameworks does a good job
+at capturing how MX was developed.
+
+
+Acknowledgements
+----------------
+
+Many of the principles embedded in MX were inspired by active/passive observation of some of 
+my MarkLogic colleagues;
+
+Alex Beasdale
+Micah Dubinko
+Philip Fennel
+Nuno Job
+Justin Makeig
+Olav Schrewing
+Norman Walsh
+
+Though clearly I take all the blame for anything incorrect, broken or plain stupid I did 
+find it useful to be able to pick over previously written code and take (what I thought) 
+was most appropriate.

@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Test Runner</title>
+	<style type="text/css">
+		body {
+			font-family: Helvetica;
+			padding: 0.5em  1em;
+		}
+		pre {
+			font-family: Inconsolata, Consolas, monospace;
+		}
+		ol.results {
+			padding-left: 0;
+		}
+		.result {
+			border-top: solid 4px;
+			padding: 0.25em 0.5em;
+			font-size: 85%;
+		}
+		li.result {
+			list-style-position: inside;
+			list-style: none;
+		}
+		.result h3 {
+			font-weight: normal;
+			font-size: inherit;
+			margin: 0;
+		}
+		.result.fail h3 {
+			color: red;
+		}
+		.pass {
+			border-color: green;
+		}
+		.fail {
+			border-color: red;
+		}
+		h2 {
+			display: inline-block;
+			margin: 0;
+		}
+		h2+div.stats {
+			display: inline-block;
+			margin-left: 1em;
+		}
+		strong.fail, 
+		h2.fail {
+			border: none;
+			color: red;
+		}
+		h2.fail:before {
+			content: "✘ ";
+		}
+		h2.pass:before {
+			content: "✔ ";
+		}
+		h2 a,
+		.result h3 a {
+			text-decoration: inherit;
+			color: inherit;
+		}
+		.fail .message {
+			font-weight: bold;
+		}
+		.namespace {
+			margin-left: 1em;
+			color: #999;
+		}
+		.namespace:before {
+			content: "(";
+		}
+		.namespace:after {
+			content: ")";
+		}
+	</style>
+</head>
+<body>
+  <h1>MX Unit Test Results</h1>
+	<p> <strong>50% pass rate: </strong><strong class="fail">22</strong> failed tests and <strong>22</strong> passed tests.</p>
+		<ol class="results">
+		<li class="result fail">
+			<h3 ><input name="test" value="{local-name-from-QName($result/ut:name)}" type="checkbox" checked="checked"></input>
+				<a href="?test={local-name-from-QName($result/ut:name)}">Name <span class="namespace">namespace</span></a> <span style="float:right;">3</span></h3>
+
+				<p class="message">error message</p>, 
+				<pre>output</pre>
+		</li>
+		<li class="result pass">
+			<h3><input name="test" value="{local-name-from-QName($result/ut:name)}" type="checkbox" checked="checked"></input>
+				<a href="?test={local-name-from-QName($result/ut:name)}">Name <span class="namespace">namespace</span></a> <span style="float:right;">3</span></h3>
+
+				<p class="message">error message</p>, 
+				<pre>output</pre>
+		</li>
+
+		</ol> 
+</body>
+</html>
