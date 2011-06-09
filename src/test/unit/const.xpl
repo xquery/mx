@@ -42,9 +42,9 @@
                   &lt;result&gt;{local:loadModuleTest()}&lt;/result&gt;
                 &lt;/test&gt;
 
-                &lt;test name="check $mx:controller-name"&gt;
+                &lt;test name="check $mx:controller-path"&gt;
                   &lt;expected&gt;true&lt;/expected&gt;
-                  &lt;result&gt;{test:assertStringEqual( $mx:controller-name, 'mx-controller.xqy')}&lt;/result&gt;
+                  &lt;result&gt;{test:assertStringEqual( $mx:controller-path, '/mx-controller.xqy')}&lt;/result&gt;
                 &lt;/test&gt;
 
                 &lt;test name="check $mx:default-content-type"&gt;

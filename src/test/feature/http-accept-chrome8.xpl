@@ -37,7 +37,7 @@
 					<pattern>
 						<title>Check for a valid response.</title>
 						<rule context="/c:response">
-							<assert test="@status = '200'">The HTTP response of '<value-of select="@status"/>' does not match the required value of '200'.</assert>
+							<assert test="@status = '210'">The HTTP response of '<value-of select="@status"/>' does not match the required value of '200'.</assert>
 							<assert test="starts-with(c:header[@name = 'Content-Type']/@value, 'text/xml')">The response content type must be 'text/html'.</assert>
 						</rule>
 					</pattern>
@@ -48,4 +48,5 @@
 			<p:empty/>
 		</p:input>
 	</p:validate-with-schematron>
+
 </p:declare-step>

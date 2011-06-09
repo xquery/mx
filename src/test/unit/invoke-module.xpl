@@ -35,7 +35,7 @@
             <xsl:template match="/">
               <tests name="invoke module">
                 <test name="invoke main controller module">
-                  <expected>/mx-controller.xqy?mode=error&amp;</expected>
+                  <expected>/mx-controller.xqy?mode=error&amp;url=</expected>
                   <result><xsl:copy-of select="*/text()"/></result>
                 </test>
               </tests>

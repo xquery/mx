@@ -36,29 +36,54 @@
 
               &lt;tests name="test rewrite functionality"&gt;
 
-                &lt;test name="inline test response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=/inline.test&amp;content-type=text/html&amp;type=&amp;model=&amp;method=GET&amp;]]>&lt;/expected&gt;
+                &lt;test name="inline rewrite test response"&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Finline.test&amp;type=inline&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/inline.test', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
-                &lt;test name="forward test response"&gt;
+                &lt;test name="forward rewrite test response"&gt;
                   &lt;expected&gt;<![CDATA[/static-test.html]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/forward.test', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
-                &lt;test name="redirect test response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=redirect&amp;url=/static-test.html]]>&lt;/expected&gt;
+                &lt;test name="redirect rewrite test response"&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/redirect.test', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
-                &lt;test name="passthru test response"&gt;
+                &lt;test name="redirect rewrite test response with url params"&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?test=1&amp;mode=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
+                  &lt;result&gt;{xdmp:quote(mx:rewrite( '/redirect.test?test=1', $mx:app ))}&lt;/result&gt;
+                &lt;/test&gt;
+
+                &lt;test name="passthru rewrite test response"&gt;
                   &lt;expected&gt;<![CDATA[/robots.txt]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/robots.txt', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
-                &lt;test name="test mx status response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=/mx&amp;content-type=&amp;type=&amp;model=&amp;method=GET&amp;]]>&lt;/expected&gt;
+                &lt;test name="test mx rewrite status response"&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Fmx&amp;type=inline&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/mx', $mx:app ))}&lt;/result&gt;
+                &lt;/test&gt;
+
+<!--
+                &lt;test name="test rewrite with no  param to url"&gt;
+                  &lt;expected&gt;<![CDATA[/mx]]>&lt;/expected&gt;
+                  &lt;result&gt;{xdmp:quote(mx:constructURL( '/mx', '',
+                  ()))}&lt;/result&gt;
+                &lt;/test&gt;
+//-->
+
+                &lt;test name="test rewrite adding param to url"&gt;
+                  &lt;expected&gt;<![CDATA[/mx?test=1]]>&lt;/expected&gt;
+                  &lt;result&gt;{xdmp:quote(mx:constructURL( '/mx', '',
+                  &lt;param name="test" value="1"/&gt;))}&lt;/result&gt;
+                &lt;/test&gt;
+
+                &lt;test name="test rewrite adding multiple params to url"&gt;
+                  &lt;expected&gt;<![CDATA[/mx?test=1&amp;anothertest=1]]>&lt;/expected&gt;
+                  &lt;result&gt;{xdmp:quote(mx:constructURL( '/mx', '',
+                  (&lt;param name="test" value="1"/&gt;,&lt;param name="anothertest" value="1"/&gt;)))}&lt;/result&gt;
                 &lt;/test&gt;
 
               &lt;/tests&gt;
