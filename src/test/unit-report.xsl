@@ -105,7 +105,7 @@
       </head>
       <body onload="prettyPrint()">
         <h1><xsl:value-of select="$title"/> Results</h1>
-        <p> <strong><xsl:value-of select="round(($pass div $total) * 100)"/>% pass rate: </strong><strong class="fail"><xsl:value-of select="$fail"/></strong> failed tests and <strong><xsl:value-of select="$pass"/></strong> passed tests.</p>
+        <p> <strong><xsl:value-of select="round(($pass div ($pass + $fail)) * 100)"/>% pass rate: </strong><strong class="fail"><xsl:value-of select="$fail"/></strong> failed tests and <strong><xsl:value-of select="$pass"/></strong> passed tests.</p>
           <xsl:apply-templates/>
         <br/><br/>
         <div class="footer"><p style="text-align:right"><i><xsl:value-of select="current-dateTime()"/></i></p></div>
