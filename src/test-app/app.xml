@@ -1,13 +1,20 @@
 <app xmlns="http://www.marklogic.com/mx" default-context="?">
-  <!-- passthru examples //-->
+
+  <!-- passthru  //-->
   <path url="/resource/" type="passthru" description=""/>
   <path url="/robots.txt" type="passthru" description=""/>
   <path url="/static-test.html" type="passthru" description=""/>
-  <!-- basic http redirection //-->
-  <path url="/forward.test" type="forward" description="example of forwarding which does not change url">/static-test.html</path>
-  <path url="/redirect.test" type="redirect" description="example of redirecting, which changes url to redirected url">/static-test.html</path>
-  <!-- simple inline tests //-->
-  <path url="/inline.test" type="inline" content-type="text/html" method="GET">
+
+
+  <!-- http redirection //-->
+  <path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
+  <path url="/redirect.test" type="redirect" description="example of
+                                                         redirecting,
+                                                          changing the
+                                                          url">/static-test.html</path>
+
+  <!-- inline tests //-->
+  <path url="/inline.test" content-type="text/html" method="GET">
     <html>
       <body>
         <h1>inline test</h1>
@@ -21,7 +28,53 @@
       </body>
     </html>
   </path>
-  <!-- examples of models //-->
+
+  <!-- data //-->
+  <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
+    <data title="this is /data.test">
+      <test>
+        <a>{1 + 1}</a>
+      </test>
+    </data>
+  </path>
+
+  <path url="/data2.test" method="GET" description="inline test with
+                                                    no content type
+                                                    set, should fall
+                                                    back to using
+                                                    application/xml">
+    let $data := <test>a</test>
+    return $data
+  </path>
+
+  <path url="/data3.test" method="GET" content-type="text/plain" module="">
+    mx:eval('1 + 1')
+  </path>
+
+  <path url="/data4.test" method="GET" module="">
+     mx:handle-request(<request
+     content-type="text/xml"><params><url>/data.text</url><type>inline</type></params></request>,
+     xdmp:get-server-field('mx:map') )
+  </path>
+
+  <path url="/data5.test" method="GET">
+     mx:data('/data.text')
+  </path>
+
+
+
+
+
+  <!-- example templates (views) //-->
+  <path url="/data3" type="template" method="GET" content-type="text/html" data="/data3.test">
+    <html>
+      <body>
+        <textarea rows="10" cols="50">{.}</textarea>
+      </body>
+    </html>
+  </path>
+  <path url="/data4" type="xslt-template" method="GET" content-type="text/html" data="/data3.test" description="inline test with no content type set, should fall back to using application/xml">
+  </path>
 
   <!-- default MX (required for MX build/test) //-->
   <path url="/mx" method="GET" type="inline" content-type="text/html" description="MX status page">

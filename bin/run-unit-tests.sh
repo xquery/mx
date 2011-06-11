@@ -3,6 +3,9 @@ export CLASSPATH=$CLASSPATH:/Users/jfuller/Source/MarkLogic/framework-dist/lib/c
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/invoke-module.xml src/test/unit/invoke-module.xpl
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/const.xml src/test/unit/const.xpl
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/rewrite.xml src/test/unit/rewrite.xpl
+java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/request.xml src/test/unit/request.xpl
+java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/misc.xml src/test/unit/misc.xpl
+
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit-report.html src/test/unit/Z_report.xpl
 
 

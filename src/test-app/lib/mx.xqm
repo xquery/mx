@@ -10,6 +10,7 @@ declare option xdmp:mapping "true";
 (: default config :)
 declare variable $mx:controller-path      as xs:string := '/mx-controller.xqy';
 declare variable $mx:default-content-type as xs:string := 'application/xml';
+declare variable $mx:default-type         as xs:string := 'inline';
 
 (: mode is set when mx-controller.xqy is called :)
 declare variable $mx:mode as xs:string := xdmp:get-request-field('mode','rewrite');
@@ -82,11 +83,12 @@ return
   else if($match and $match/@type eq 'forward') then
     if ($querystring) then fn:concat($match,'?',$querystring) else $match
   else if($match and $match/@type eq 'redirect') then
-    mx:constructURL(fn:concat($mx:controller-path),$querystring,
-                    (<param name='mode' value='redirect'/>, 
-                     <param name='url' value='{$match}'/>))
+    mx:constructURL($mx:controller-path, $querystring,
+             (<param name='mode' value='redirect'/>, 
+              <param name='type' value='{$match/@type}'/>,
+              <param name='url' value='{$match}'/>))
   else if($match) then
-    mx:constructURL($mx:controller-path,$querystring,
+    mx:constructURL($mx:controller-path, $querystring,
              (<param name='mode' value='handler'/>, 
               <param name='url' value='{$requestURL}'/>,
               <param name='type' value='{$match/@type}'/>,
@@ -95,7 +97,8 @@ return
               <param name='method' value='{$match/@method}'/>))
   else
     mx:constructURL($mx:controller-path, $querystring,
-              (<param name='mode' value='error'/>,<param name='url' value='{$requestURL}'/>))
+              (<param name='mode' value='error'/>,
+               <param name='url' value='{$requestURL}'/>))
 };
 
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -104,14 +107,14 @@ declare function mx:handle-request($req as element(mx:request), $app-map as map:
 if ($debug-flag eq fn:true()) then
     mx:handle-debug($req, $app-map)
 else
-    let $type         as xs:string := $req/params/type
-    let $path         as xs:string := $req/params/url
+    let $type         as xs:string        := ($req/*:params/*:type, $mx:default-type)[1]
+    let $path         as xs:string        := ($req/*:params/*:url, '/mx')[1]
     let $inline       as element(mx:path) := map:get($app-map, $path)
-    let $content-type as xs:string := ($inline/@content-type,$mx:default-content-type)[1]
+    let $content-type as xs:string        := ($inline/@content-type,$mx:default-content-type)[1]
     return
-      if ($type eq 'inline') then
+      if ($type eq '' or $type eq 'inline') then
           mx:handle-response($content-type,
-                $inline/node() )
+                mx:eval(xdmp:quote($inline/node())) )
       else
           mx:handle-response($content-type,
                  mx:dispatch($req, $app-map) )
@@ -143,8 +146,8 @@ declare function mx:handle-debug($req as element(mx:request),$app-map as map:map
     {$req}
     {if($mx:cache-flag) then xdmp:query-meters() else ()}
     {
-    let $type := $req//type
-    let $path := $req//url
+    let $type := $req/params/type
+    let $path := $req/params/url
     return
       if ($type eq 'inline') then
         let $inline       := map:get($app-map, $path)
@@ -163,33 +166,31 @@ declare function mx:invoke(){
 };
 
 (: -------------------------------------------------------------------------------------------------------- :)
+declare function mx:data($path as xs:string) {
+(: -------------------------------------------------------------------------------------------------------- :)
+     mx:handle-request(<request
+     content-type="text/xml" xmlns="http://www.marklogic.com/mx"><params><url>{$path}</url><type>inline</type></params></request>,
+     xdmp:get-server-field('mx:map') )
+};
+
+(: -------------------------------------------------------------------------------------------------------- :)
+declare function mx:eval($query as xs:string){
+(: -------------------------------------------------------------------------------------------------------- :)
+ let $preamble := 'import module namespace mx = "http://www.marklogic.com/mx" at 
+              "/lib/mx.xqm";
+
+              declare namespace xdmp = "http://marklogic.com/xdmp";
+
+              '
+
+return
+  xdmp:eval(fn:concat($preamble,$query))
+};
+
+(: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:handle-response($content-type, $content) as item()* {
 (: -------------------------------------------------------------------------------------------------------- :)
 	(xdmp:set-response-content-type($content-type),$content)
-};
-
-(: -------------------------------------------------------------------------------------------------------- :)
-declare function mx:view($type as xs:string, $res, $template){
-(: -------------------------------------------------------------------------------------------------------- :)
-    ()
-};
-
-(: -------------------------------------------------------------------------------------------------------- :)
-declare function _view-xlst($res,$template,$params){
-(: -------------------------------------------------------------------------------------------------------- :)
-    ()
-};
-
-(: -------------------------------------------------------------------------------------------------------- :)
-declare function _view-xquery($res,$template,$params){
-(: -------------------------------------------------------------------------------------------------------- :)
-    ()
-};
-
-(: -------------------------------------------------------------------------------------------------------- :)
-declare function _view-mustache($res,$template,$params){
-(: -------------------------------------------------------------------------------------------------------- :)
-    ()
 };
 
 (: -------------------------------------------------------------------------------------------------------- :)

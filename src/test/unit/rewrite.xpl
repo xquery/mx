@@ -32,7 +32,7 @@
 
               declare namespace xdmp = "http://marklogic.com/xdmp";
 
-              declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Marklogic/framework-dist/src/test-app/app.xml'));
+              declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/test-app/app.xml'));
 
               &lt;tests name="test rewrite functionality"&gt;
 
@@ -47,12 +47,12 @@
                 &lt;/test&gt;
 
                 &lt;test name="redirect rewrite test response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=redirect&amp;type=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/redirect.test', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
                 &lt;test name="redirect rewrite test response with url params"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?test=1&amp;mode=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?test=1&amp;mode=redirect&amp;type=redirect&amp;url=%2Fstatic-test.html]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/redirect.test?test=1', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 

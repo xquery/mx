@@ -33,7 +33,7 @@
               declare namespace xdmp = "http://marklogic.com/xdmp";
 
               declare function (:TEST:) local:loadModuleTest() { 
-              test:assertStringEqual( $mx:controller-name, 'mx-controller.xqy')
+              test:assertStringEqual( $mx:controller-path, '/mx-controller.xqy')
               };
 
               &lt;tests name="check constants"&gt;
