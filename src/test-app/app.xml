@@ -1,4 +1,4 @@
-<app xmlns="http://www.marklogic.com/mx" default-context="?">
+<app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
 
   <!-- passthru  //-->
   <path url="/resource/" type="passthru" description=""/>
@@ -37,34 +37,27 @@
       </test>
     </data>
   </path>
-
-  <path url="/data2.test" method="GET" description="inline test with
-                                                    no content type
-                                                    set, should fall
-                                                    back to using
-                                                    application/xml">
+  <path url="/data2.test" method="GET">
     let $data := <test>a</test>
     return $data
   </path>
-
-  <path url="/data3.test" method="GET" content-type="text/plain" module="">
+  <path url="/data3.test" method="GET" content-type="text/plain">
     mx:eval('1 + 1')
   </path>
-
-  <path url="/data4.test" method="GET" module="">
-     mx:handle-request(<request
-     content-type="text/xml"><params><url>/data.text</url><type>inline</type></params></request>,
-     xdmp:get-server-field('mx:map') )
+  <path url="/data4.test" method="GET">
+    mx:data('/mx')
   </path>
-
   <path url="/data5.test" method="GET">
-     mx:data('/data.text')
+  mx:data('/data.test')
   </path>
 
-
-
-
-
+  <!-- module //-->
+  <path url="/xquery.test" method="GET" href="module/test.xqy"/>
+  <path url="/xquery2.test" method="GET" href="module/test.xqm"
+        invoke-function="local:test" invoke-ns="">
+    ('test')
+  </path>
+ 
   <!-- example templates (views) //-->
   <path url="/data3" type="template" method="GET" content-type="text/html" data="/data3.test">
     <html>
@@ -83,6 +76,9 @@
         <h1>MX Status Page</h1>
       </body>
     </html>
+  </path>
+  <path url="/mx/map" method="GET" content-type="text/plain">
+    mx:map()
   </path>
 
 </app>

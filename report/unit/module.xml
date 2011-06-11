@@ -1,0 +1,1 @@
+<tests name="test module invokation and loading"><test name="test mx:invoke with /module/example.xqy"><expected><test>2</test></expected><result><test>2</test></result></test></tests>

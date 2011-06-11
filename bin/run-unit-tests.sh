@@ -5,6 +5,7 @@ java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/rewrite.xml src/test/unit/rewrite.xpl
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/request.xml src/test/unit/request.xpl
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/misc.xml src/test/unit/misc.xpl
+java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit/module.xml src/test/unit/module.xpl
 
 java com.xmlcalabash.drivers.Main -isource=conf/test-config.xml -oresult=report/unit-report.html src/test/unit/Z_report.xpl
 

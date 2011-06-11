@@ -27,6 +27,12 @@ declare variable $mx:doc-flag     as xs:boolean := ((xdmp:get-request-field('doc
 declare variable $mx:cache-flag   as xs:boolean := ((xdmp:get-request-field('cache') eq 'true'),fn:true())[1];  
 
 (: -------------------------------------------------------------------------------------------------------- :)
+declare function mx:map() {
+(: -------------------------------------------------------------------------------------------------------- :)
+    xdmp:get-server-field('mx:map')
+};
+
+(: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:map($app) as map:map{
 (: -------------------------------------------------------------------------------------------------------- :)
 if(fn:empty(xdmp:get-server-field('mx:map')) or $mx:flush-flag eq fn:true()) then
@@ -108,11 +114,19 @@ if ($debug-flag eq fn:true()) then
     mx:handle-debug($req, $app-map)
 else
     let $type         as xs:string        := ($req/*:params/*:type, $mx:default-type)[1]
+    let $href         as xs:string        := ($req/*:params/*:href, '')[1]
     let $path         as xs:string        := ($req/*:params/*:url, '/mx')[1]
     let $inline       as element(mx:path) := map:get($app-map, $path)
     let $content-type as xs:string        := ($inline/@content-type,$mx:default-content-type)[1]
     return
-      if ($type eq '' or $type eq 'inline') then
+      if ($href ne '') then
+         if ($inline/node()) then
+          mx:handle-response($content-type,
+                 mx:invoke($href,$inline/node(),()))
+           else
+          mx:handle-response($content-type,
+                 mx:invoke($href))
+      else if ($type eq '' or $type eq 'inline') then
           mx:handle-response($content-type,
                 mx:eval(xdmp:quote($inline/node())) )
       else
@@ -160,9 +174,15 @@ declare function mx:handle-debug($req as element(mx:request),$app-map as map:map
 };
 
 (: -------------------------------------------------------------------------------------------------------- :)
-declare function mx:invoke(){
+declare function mx:invoke($href as xs:string){
 (: -------------------------------------------------------------------------------------------------------- :)
- ()
+ xdmp:invoke($href)
+};
+
+(: -------------------------------------------------------------------------------------------------------- :)
+declare function mx:invoke($href as xs:string, $function, $vars){
+(: -------------------------------------------------------------------------------------------------------- :)
+ xdmp:invoke($href)
 };
 
 (: -------------------------------------------------------------------------------------------------------- :)
