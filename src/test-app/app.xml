@@ -59,15 +59,18 @@
   <path url="/data8.test" method="GET">
   mx:data('/data7.test')
   </path>
+  <path url="/data9.test" method="GET" content-type="text/xml">
+  mx:data('/template1')
+  </path>
 
   <!-- module //-->
   <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
   <path url="/xquery2.test" method="GET"
-        href="/modules/example-module.xqm;my:test" ns="http://example.org/test">
+        href="/modules/example-module.xqm#my:test" ns="http://example.org/test">
     <arg>Hello</arg>
   </path>
   <path url="/xquery3.test" method="GET"
-        href="/modules/example-module.xqm;my:test2"
+        href="/modules/example-module.xqm#my:test2"
         ns="http://example.org/test">
     <arg>World</arg>
     <arg>Hello</arg>

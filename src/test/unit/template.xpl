@@ -37,16 +37,16 @@
               &lt;tests name="test template rendering"&gt;
 
                 &lt;test name="test xslt template"&gt;
-                  &lt;expected&gt;<![CDATA[&lt;html&gt;&lt;body&gt;&lt;h2&gt;MX XSLT Template&lt;/h2&gt;&lt;textarea rows="10" cols="60"&gt;&lt;html xmlns="http://www.marklogic.com/mx"&gt;&lt;body&gt;&lt;h1&gt;MX Status Page&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;]]>&lt;/expected&gt;
+                  &lt;expected&gt;<![CDATA[<html><body><h2>MX XSLT Template</h2><pre><data xmlns="http://www.marklogic.com/mx"/></pre></body></html>]]>&lt;/expected&gt;
                   &lt;result&gt;{mx:handle-response('text/xml',
           xdmp:xslt-eval(&lt;xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
       &lt;xsl:template match="*"&gt;
         &lt;html&gt;
           &lt;body&gt;
             &lt;h2&gt;MX XSLT Template&lt;/h2&gt;
-            &lt;textarea rows="10" cols="60"&gt;
-            &lt;xsl:copy/&gt; test
-            &lt;/textarea&gt;
+            &lt;pre&gt;           
+            &lt;xsl:copy/&gt; 
+            &lt;/pre&gt;
           &lt;/body&gt;
         &lt;/html&gt;
       &lt;/xsl:template&gt;
@@ -55,6 +55,17 @@
 &lt;/result&gt;
                 &lt;/test&gt;
 
+<!--
+                &lt;test name="test xslt template"&gt;
+                  &lt;expected&gt;<![CDATA[<html><body><h2>MX XSLT Template</h2><pre><data xmlns="http://www.marklogic.com/mx"/></pre></body></html>]]>&lt;/expected&gt;
+                  &lt;result&gt;{mx:data('/template2')}&lt;/result&gt;
+                &lt;/test&gt;
+
+                &lt;test name="test xslt template"&gt;
+                  &lt;expected&gt;<![CDATA[<html><body><h2>MX XSLT Template</h2><pre><data xmlns="http://www.marklogic.com/mx"/></pre></body></html>]]>&lt;/expected&gt;
+                  &lt;result&gt;{mx:data('/template1')}&lt;/result&gt;
+                &lt;/test&gt;
+//-->
               &lt;/tests&gt;
 
             </query>

@@ -53,22 +53,22 @@
 
                 &lt;test name="test mx:invoke with /module/example-module.xqm"&gt;
                   &lt;expected&gt;<![CDATA[<test>test</test>]]>&lt;/expected&gt;
-                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm;my:test",'test','http://example.org/test')}&lt;/result&gt;
+                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm#my:test",'test','http://example.org/test')}&lt;/result&gt;
                 &lt;/test&gt;
 
                 &lt;test name="test mx:invoke 2 with /module/example-module.xqm"&gt;
                   &lt;expected&gt;<![CDATA[<test>dynamic</test>]]>&lt;/expected&gt;
-                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm;my:test",'dynamic','http://example.org/test')}&lt;/result&gt;
+                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm#my:test",'dynamic','http://example.org/test')}&lt;/result&gt;
                 &lt;/test&gt;
 
                 &lt;test name="test mx:invoke with arity 2 function in /module/example-module.xqm "&gt;
                   &lt;expected&gt;<![CDATA[<test>hello world</test>]]>&lt;/expected&gt;
-                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm;my:test2",('hello','world'),'http://example.org/test')}&lt;/result&gt;
+                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm#my:test2",('hello','world'),'http://example.org/test')}&lt;/result&gt;
                 &lt;/test&gt;
 
                 &lt;test name="another test mx:invoke with arity 2 function in /module/example-module.xqm "&gt;
                   &lt;expected&gt;<![CDATA[<test>world hello</test>]]>&lt;/expected&gt;
-                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm;my:test2",('world','hello'),'http://example.org/test')}&lt;/result&gt;
+                  &lt;result&gt;{mx:invoke("/modules/example-module.xqm#my:test2",('world','hello'),'http://example.org/test')}&lt;/result&gt;
                 &lt;/test&gt;
 
                 <!--

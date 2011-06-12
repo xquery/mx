@@ -1,0 +1,62 @@
+<app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
+
+  <!-- passthru  //-->
+  <path url="/resource/" type="passthru" description=""/>
+  <path url="/robots.txt" type="passthru" description=""/>
+
+  <!-- http redirection //-->
+
+  <!-- inline //-->
+  <path url="/home" content-type="text/html" method="GET">
+    <html xmlns="">
+      <body>
+        <h1>Home Page</h1>
+      </body>
+    </html>
+  </path>
+
+
+  <!-- data //-->
+  <path url="/d/people" content-type="text/xml" method="GET">
+    <people xmlns="">
+      <person>
+        <first>Jim</first>
+      </person>
+    </people>
+  </path>
+  <path url="/d/articles" content-type="text/xml" method="GET">
+    <articles xmlns="">
+      <article>
+        <section><title>My first article</title></section>
+      </article>
+    </articles>
+  </path>
+  <path url="/github.data" content-type="text/plain" method="GET">
+   xdmp:document-get("http://github.com/api/v2/json/repos/show/xquery/xprocxq",
+          <options xmlns="xdmp:document-get">
+           <format>text</format>
+       </options>)
+  </path>
+
+  <!-- module //-->
+ 
+  <!-- templates (views) //-->
+  <path url="/gitlive" method="GET" type="template"
+        content-type="text/html" data="/github.data">
+    <p>
+      <a href="{{repository.url}}">{{repository.name}}</a>
+      owner: {{repository.owner}}<br/>
+      language: {{repository.language}}<br/>
+    </p>
+  </path>
+
+  <!-- default MX (required for MX build/test) //-->
+  <path url="/mx" method="GET" type="inline" content-type="text/html" description="MX status page">
+    <html>
+      <body>
+        <h1>MX Status Page</h1>
+      </body>
+    </html>
+  </path>
+
+</app>
