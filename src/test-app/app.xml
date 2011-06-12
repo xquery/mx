@@ -4,6 +4,7 @@
   <path url="/resource/" type="passthru" description=""/>
   <path url="/robots.txt" type="passthru" description=""/>
   <path url="/static-test.html" type="passthru" description=""/>
+  <path url="/app.xml" type="passthru" description=""/>
 
 
   <!-- http redirection //-->
@@ -28,6 +29,7 @@
       </body>
     </html>
   </path>
+  <path url="/inline3.test" content-type="text/xml" method="GET" href="/static-test.html"/>
 
   <!-- data //-->
   <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
@@ -50,24 +52,62 @@
   <path url="/data5.test" method="GET">
   mx:data('/data.test')
   </path>
+  <path url="/data6.test" method="GET" content-type="text/xml" href="/test.xml"/>
+  <path url="/data7.test"  method="GET" content-type="text/plain">
+    fn:string('{"text":"world"}')
+  </path>
+  <path url="/data8.test" method="GET">
+  mx:data('/data7.test')
+  </path>
 
   <!-- module //-->
-  <path url="/xquery.test" method="GET" href="module/test.xqy"/>
-  <path url="/xquery2.test" method="GET" href="module/test.xqm"
-        invoke-function="local:test" invoke-ns="">
-    ('test')
+  <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
+  <path url="/xquery2.test" method="GET"
+        href="/modules/example-module.xqm;my:test" ns="http://example.org/test">
+    <arg>Hello</arg>
+  </path>
+  <path url="/xquery3.test" method="GET"
+        href="/modules/example-module.xqm;my:test2"
+        ns="http://example.org/test">
+    <arg>World</arg>
+    <arg>Hello</arg>
   </path>
  
   <!-- example templates (views) //-->
-  <path url="/data3" type="template" method="GET" content-type="text/html" data="/data3.test">
+  <path url="/template1" type="template" method="GET" content-type="text/html" data="/data7.test" description="">
     <html>
+      <head>
+      </head>
       <body>
-        <textarea rows="10" cols="50">{.}</textarea>
+        Hello {{text}}!
       </body>
     </html>
   </path>
-  <path url="/data4" type="xslt-template" method="GET" content-type="text/html" data="/data3.test" description="inline test with no content type set, should fall back to using application/xml">
+  <path url="/template2" type="template" method="GET" content-type="text/html" data="/data.test" description="">
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+      <xsl:template match="*">
+        <html>
+          <body>
+            <h2>MX XSLT Template</h2>
+            <textarea rows="10" cols="60"><xsl:copy-of select="."/></textarea>
+          </body>
+        </html>
+      </xsl:template>
+    </xsl:stylesheet>
   </path>
+  <path url="/template3" type="template" method="GET" content-type="text/html" data="/xquery.test" description="">
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+      <xsl:template match="*">
+        <html>
+          <body>
+            <h2>MX XSLT Template</h2>
+            <textarea rows="10" cols="60"><xsl:copy-of select="."/></textarea>
+          </body>
+        </html>
+      </xsl:template>
+    </xsl:stylesheet>
+  </path>
+
 
   <!-- default MX (required for MX build/test) //-->
   <path url="/mx" method="GET" type="inline" content-type="text/html" description="MX status page">

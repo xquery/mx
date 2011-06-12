@@ -37,7 +37,7 @@
               &lt;tests name="test rewrite functionality"&gt;
 
                 &lt;test name="inline rewrite test response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Finline.test&amp;type=&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Finline.test&amp;href=&amp;ns=&amp;type=&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/inline.test', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 
@@ -62,7 +62,7 @@
                 &lt;/test&gt;
 
                 &lt;test name="test mx rewrite status response"&gt;
-                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Fmx&amp;type=inline&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
+                  &lt;expected&gt;<![CDATA[/mx-controller.xqy?mode=handler&amp;url=%2Fmx&amp;href=&amp;ns=&amp;type=inline&amp;model=&amp;content-type=text%2Fhtml&amp;method=GET]]>&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:rewrite( '/mx', $mx:app ))}&lt;/result&gt;
                 &lt;/test&gt;
 

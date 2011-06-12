@@ -33,7 +33,7 @@
           <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
               version="2.0">
             <xsl:template match="/">
-              <tests name="invoke module">
+              <tests name="Test controller ">
                 <test name="invoke main controller module">
                   <expected>/mx-controller.xqy?mode=error&amp;url=</expected>
                   <result><xsl:copy-of select="*/text()"/></result>
