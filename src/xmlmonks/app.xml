@@ -1,26 +1,30 @@
 <app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
 
   <!-- passthru  //-->
-  <path url="/resource/" type="passthru" description=""/>
+  <path url="/resource/"  type="passthru" description=""/>
   <path url="/robots.txt" type="passthru" description=""/>
 
   <!-- http redirection //-->
 
   <!-- inline //-->
   <path url="/home" content-type="text/html" method="GET">
-    <html xmlns="">
+    <html xmlns="http://www.w3.org/1999/xhtml">
       <body>
         <h1>Home Page</h1>
+        {mx:data('/git')}
       </body>
     </html>
   </path>
-
 
   <!-- data //-->
   <path url="/d/people" content-type="text/xml" method="GET">
     <people xmlns="">
       <person>
         <first>Jim</first>
+        <last>Fuller</last>
+        <email>jim.fuller@webcomposite.com</email>
+        <twitter>xquery</twitter>
+        <github>xquery</github>
       </person>
     </people>
   </path>
@@ -31,8 +35,11 @@
       </article>
     </articles>
   </path>
-  <path url="/github.data" content-type="text/plain" method="GET">
-   xdmp:document-get("http://github.com/api/v2/json/repos/show/xquery/xprocxq",
+  <path url="/d/github" content-type="text/plain" method="GET">
+   let $id  :=  mx:param('id')
+   let $url := fn:concat("http://github.com/api/v2/json/repos/show/",$id)
+   return
+   xdmp:document-get($url,
           <options xmlns="xdmp:document-get">
            <format>text</format>
        </options>)
@@ -41,13 +48,17 @@
   <!-- module //-->
  
   <!-- templates (views) //-->
-  <path url="/gitlive" method="GET" type="template"
-        content-type="text/html" data="/github.data">
-    <p>
-      <a href="{{repository.url}}">{{repository.name}}</a>
-      owner: {{repository.owner}}<br/>
-      language: {{repository.language}}<br/>
+  <path url="/git" method="GET" type="template"
+        content-type="text/html" data="/d/github">
+  {{#repositories}}
+  <p xmlns="http://www.w3.org/1999/xhtml">
+      <a href="{{url}}">{{name}}</a>
+      owner: {{owner}}<br/>
+      language: {{language}}<br/>
     </p>
+
+  {{/repositories}}
+
   </path>
 
   <!-- default MX (required for MX build/test) //-->

@@ -50,6 +50,22 @@
                   &lt;expected&gt;<![CDATA[<data xmlns="http://www.marklogic.com/mx"><test><a>2</a></test></data>]]>&lt;/expected&gt;
                   &lt;result&gt;{mx:data("/data.test")}&lt;/result&gt;
                 &lt;/test&gt;
+
+                &lt;test name="test mx:param "&gt;
+                  &lt;expected&gt;true&lt;/expected&gt;
+                  &lt;result&gt;{test:assertStringContain(mx:param("dt"),':')}&lt;/result&gt;
+                &lt;/test&gt;
+
+<!--
+                &lt;test name="test mx:get-request "&gt;
+                  &lt;expected&gt;<![CDATA[<mx:request
+                  xmlns:mx="http://www.marklogic.com/mx" method=""
+                  rewrite-url="" protocol="xdbc"
+                  client-ip="127.0.0.1"><session-fields/><headers/><params></params><files/><body
+                  content-type=""/></mx:request>]]>&lt;/expected&gt;
+                  &lt;result&gt;{mx:get-request()}&lt;/result&gt;
+                &lt;/test&gt;
+//-->
               &lt;/tests&gt;
 
             </query>
