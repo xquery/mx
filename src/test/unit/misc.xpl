@@ -51,12 +51,13 @@
                   &lt;result&gt;{mx:data("/data.test")}&lt;/result&gt;
                 &lt;/test&gt;
 
+<!--
+
                 &lt;test name="test mx:param "&gt;
                   &lt;expected&gt;true&lt;/expected&gt;
                   &lt;result&gt;{test:assertStringContain(mx:param("dt"),':')}&lt;/result&gt;
                 &lt;/test&gt;
 
-<!--
                 &lt;test name="test mx:get-request "&gt;
                   &lt;expected&gt;<![CDATA[<mx:request
                   xmlns:mx="http://www.marklogic.com/mx" method=""

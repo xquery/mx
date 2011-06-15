@@ -9,17 +9,90 @@
   <!-- inline //-->
   <path url="/home" content-type="text/html" method="GET">
     <html xmlns="http://www.w3.org/1999/xhtml">
+      {mx:data('/head')}
       <body>
-        <h1>Home Page</h1>
-        {mx:data('/git')}
+        <header>
+          {mx:data('/nav')}
+        </header>
+        <br/>
+	<nav id="group">
+          <h3>XML | XSLT | XQuery | XProc | Schema | Big Data </h3>
+        </nav>
+        <br/>
+        <section id="posts">
+          <ul class="posts">
+            <li><a href="/2011/06/why-sql-sucks-for-nosql-unstructured-databases.html">Why SQL Sucks for NoSQL Unstructured Databases</a>, <span>12 June 2011</span></li>
+            <li><a href="/2011/06/Berlin-Buzzwords-Recap.html">Berlin Buzzwords Recap</a>, <span>09 June 2011</span></li>
+            <li><a href="/2011/05/jsbbq-and-some-portuguese-poetry.html">jsbbq.org and some Portuguese Poetry</a>, <span>22 May 2011</span></li>
+          </ul>
+        </section>
+        <br/>
+        <footer>
+          <p>This is the footer</p>
+        </footer>
+      </body>
+    </html>
+  </path>
+
+  <path url="/head" content-type="text/html" method="GET">
+    <head xmlns="http://www.w3.org/1999/xhtml">
+      <meta charset="UTF-8"/>
+      <title>user: { mx:session('user') }</title>
+      <link  href="http://fonts.googleapis.com/css?family=Cardo:regular" rel="stylesheet" type="text/css" />
+      <link type="text/css" rel="stylesheet" href="/resource/css/style.css"/>
+    </head>
+  </path>
+
+  <path url="/nav" content-type="text/html" method="GET">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>
+          email: <a href="mailto:jim@xmlmonks.com" rel="">jim@xmlmonks.com</a>
+          twitter: <a href="http://www.twitter.com/xmlmonks" rel="external">@xmlmonks</a>
+        </p>
+      </div>
+  </path>
+
+  <path url="/userprofile" type="template" content-type="text/html" data="/d/people"
+        method="GET">
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+      <xsl:template match="*">
+        <div>
+          <h2>User Profile</h2>
+          First: <xsl:value-of select="person/first"/><br/>
+          Last: <xsl:value-of select="person/last"/><br/>
+          Email: <xsl:value-of select="person/email"/><br/>
+          Github: <xsl:value-of select="person/github"/><br/>
+          Twitter: <xsl:value-of select="person/twitter"/><br/>
+        </div>
+      </xsl:template>
+      </xsl:stylesheet>
+  </path>
+
+  <path url="/logon" content-type="text/html" method="GET">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <body>
+        <h1>Logon</h1>
       </body>
     </html>
   </path>
 
   <!-- data //-->
-  <path url="/d/people" content-type="text/xml" method="GET">
+  <path url="/mail/xproc" content-type="text/xml" method="GET">
+    xdmp:document-get('http://markmail.org/atom/xproc')
+  </path>
+
+  <path url="/test" content-type="text/xml" method="GET">
+    mx:delete-cache()
+  </path>
+
+  <path url="/json" content-type="text/plain" method="GET">
+    import module namespace json="http://marklogic.com/json" at "/lib/mljson/lib/json.xqy";
+    json:xmlToJSON(<json type="object"><item type="string">test</item></json>)
+  </path>
+
+  <path url="/d/people" content-type="application/json" method="GET">
     <people xmlns="">
-      <person>
+      <person id="user">
         <first>Jim</first>
         <last>Fuller</last>
         <email>jim.fuller@webcomposite.com</email>
@@ -28,13 +101,15 @@
       </person>
     </people>
   </path>
+
   <path url="/d/articles" content-type="text/xml" method="GET">
-    <articles xmlns="">
+    <articles xmlns="data">
       <article>
         <section><title>My first article</title></section>
       </article>
     </articles>
   </path>
+
   <path url="/d/github" content-type="text/plain" method="GET">
    let $id  :=  mx:param('id')
    let $url := fn:concat("http://github.com/api/v2/json/repos/show/",$id)
@@ -43,6 +118,20 @@
           <options xmlns="xdmp:document-get">
            <format>text</format>
        </options>)
+  </path>
+
+  <path url="/d/github.xml" content-type="text/xml" method="GET">
+    import module namespace json="http://marklogic.com/json" at "/lib/mljson/lib/json.xqy";
+
+   let $id  :=  mx:param('id')
+   let $url := fn:concat("http://github.com/api/v2/json/repos/show/",$id)
+   return
+   json:jsonToXML(
+   xdmp:document-get($url,
+          <options xmlns="xdmp:document-get">
+           <format>text</format>
+       </options>)
+       )
   </path>
 
   <!-- module //-->
