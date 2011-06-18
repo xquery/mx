@@ -1,11 +1,41 @@
-body {  font-family: 'Cantarell', arial, serif; font-size: 125%;width: 90%; padding:25px; padding-top: 0; margin-top: 0;}
+body { background-color:#FFFFF4; font-family: 'Cantarell', arial, serif; font-size: 125%;width: 90%; padding:35px; padding-top: 0; margin-top: 10;}
 a:link, a:visited {border:none;text-decoration:underline;font-style:normal;color:black;}
 a:hover {text-decoration: none;color: #a3211f;}
-h1 { text-align:right;}
-h2 { padding-top: 3px; padding-left:5px; height:27px; background-color: #cccccc; font-size: 75%; }
-footer { font-size: 75%;font-style:italic;}
-.search {float:right; padding-right:3px;}
-.contacts {float:left; text-align:left; font-size: 40%;
-           padding-right:3px; color:  #cccccc; }
-sup{color: #cccccc; font-size:65%;}
+h1 { text-align:right; margin-right:-10px; margin-left:5px;}
+h2 { padding-top: 3px; padding-left:5px; height:30px; background-color: #cccccc; font-size: 75%; }
+footer { font-size: 65%;font-style:italic;float:right;}
+.search {float:right; padding-right:10px;}
+.contacts { font-family: 'Inconsolata', arial, serif; float:left; text-align:left; font-size: 35%; padding-right:3px; color:  #cccccc; }
+sup{opacity:0.6;-moz-opacity:0.6;font-size:65%;}
+sup.beta{color:  #a3211f; font-size:50%;opacity:0.6;-moz-opacity:0.6;}
+span.tags {font-size:75%;padding:2px;display:inline;color: #000000;background-color:#cccccc;}
+ul { padding-top:0;margin: 5; padding-left:50; list-style-type: none; }
+li { margin: 9;}
+a.current{text-decoration: none; color: #a3211f}
+a.altlink{color: #a3211f;opacity:0.6;-moz-opacity:0.6;}
+span.date{font-size: 75%; opacity:0.6;-moz-opacity:0.6}
+.ui-menu {
+        list-style:none;
+        padding: 2px;
+        margin: 0;
+        width:50;
+        display:block;
+}
+.ui-menu .ui-menu-item {
+        margin-left:0;
+}
+.ui-autocomplete ul
+{               font-size: small;
+                list-style-type: none;
+                margin: 0;
+                width:25%;
+}
+.ui-autocomplete li
+{
+    margin-left:-25;
 
+    font-size: small;
+    list-style-type: none;
+    margin: 0;
+}
+div.article{padding-top:0;margin: 5; padding-left:59;}

@@ -27,7 +27,7 @@ declare variable $mx:log-flag  as xs:boolean := fn:true();
 declare variable $mx:assert    as xs:boolean := fn:true();
 
 (: flags - to permanantly disable any of these behaviors set to fn:false() :)
-declare variable $mx:flush-flag   as xs:boolean := ((xdmp:get-request-field('flush') eq 'true'),fn:false())[1]; 
+declare variable $mx:flush-flag   as xs:boolean := ((xdmp:get-request-field('flush') eq 'true'),fn:true())[1]; 
 declare variable $mx:debug-flag   as xs:boolean := ((xdmp:get-request-field('debug') eq 'true'),fn:false())[1]; 
 declare variable $mx:profile-flag as xs:boolean := ((xdmp:get-request-field('profile') eq 'true'),fn:false())[1];  
 declare variable $mx:doc-flag     as xs:boolean := ((xdmp:get-request-field('doc') eq 'true'),fn:false())[1]; 
@@ -53,7 +53,7 @@ declare variable $mx:jsonToXML       := xdmp:function(fn:QName('http://marklogic
   if ( fn:matches($requestURL,$passthru)) then
     if ($querystring) then fn:concat($requestURL,'?',$querystring) else $requestURL
   else if($match and $match/@type eq 'forward') then
-    if ($querystring) then fn:concat($match,'?',$querystring) else $match
+    if ($querystring) then fn:concat($match,'&amp;',$querystring) else $match
   else if($match/@type eq 'redirect') then
     mx:constructURL($mx:controller-path, $querystring,
              (<param name='mode' value='redirect'/>, 
@@ -322,6 +322,8 @@ declare function mx:eval($query as xs:string){
 (: -------------------------------------------------------------------------------------------------------- :)
  let $preamble := 'import module namespace mx = "http://www.marklogic.com/mx" at 
               "/lib/mx.xqm";
+    import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
+    
               declare namespace xdmp = "http://marklogic.com/xdmp";
               '
 return
