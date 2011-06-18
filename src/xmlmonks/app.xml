@@ -1,4 +1,5 @@
-<app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
+<app xmlns="http://www.marklogic.com/mx"
+     xmlns:xm="http://xmlmonks.com" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
 
   <!-- passthru  //-->
   <path url="/resource/"  type="passthru" description=""/>
@@ -7,50 +8,56 @@
   <!-- http redirection //-->
 
   <!-- inline //-->
-  <path url="/home" content-type="text/html" method="GET">
+  <path url="/monastery" content-type="text/html" method="GET">
     <html xmlns="http://www.w3.org/1999/xhtml">
-      {mx:data('/head')}
+      <head>
+        <meta charset="utf-8"/>     
+        <title>XML Monks</title>
+        <link rel="icon" href="/favicon.ico"/> 
+        <link href="http://fonts.googleapis.com/css?family=Cantarell" rel="stylesheet" type="text/css"/>
+        <link href="/resource/css/style.css" rel="stylesheet" type="text/css"/>
+      </head>
       <body>
         <header>
-          {mx:data('/nav')}
+          <h1><span class="contacts">linkedin:&#160;<a
+          href="http://cz.linkedin.com/in/jimfuller"
+          target="linkedin">Jim Fuller</a> <br/>&#160;&#160;twitter: <a
+          href="http://twitter.com/#!/xquery" target="twitter">@xquery</a> <br/>
+          &#160;&#160;&#160;&#160;&#160;email:&#160;<a href="mailto:jim@webcomposite.com">jim@webcomposite.com</a></span> <a href="/">XML Monks</a></h1>
         </header>
-        <br/>
-	<nav id="group">
-          <h3>XML | XSLT | XQuery | XProc | Schema | Big Data </h3>
+        <nav>
+          <h2>
+            <a href="?tag=recent" style="text-decoration: none; color: #a3211f;">Recent</a>
+            | <a href="?tag=">All</a>
+            | <a href="?tag=ruminate">Ruminations</a>
+            | <a href="?tag=xml">XML</a>
+            | <a href="?tag=xquery">XQuery</a>
+            | <a href="?tag=xproc">XProc</a> | <a href="?tag=xslt">XSLT</a>
+            | <a href="?tag=web">Web</a>
+            <span class="search">search <input size="30" type="text"/></span>
+          </h2>
         </nav>
-        <br/>
-        <section id="posts">
-          <ul class="posts">
-            <li><a href="/2011/06/why-sql-sucks-for-nosql-unstructured-databases.html">Why SQL Sucks for NoSQL Unstructured Databases</a>, <span>12 June 2011</span></li>
-            <li><a href="/2011/06/Berlin-Buzzwords-Recap.html">Berlin Buzzwords Recap</a>, <span>09 June 2011</span></li>
-            <li><a href="/2011/05/jsbbq-and-some-portuguese-poetry.html">jsbbq.org and some Portuguese Poetry</a>, <span>22 May 2011</span></li>
+        <nav>
+          <ul>
+            {for $article in fn:collection('articles')
+             order by $article/xm:article/@date descending
+             return
+             if($article/xm:article/@type) then
+             <li>{fn:data($article/xm:article/@date)} &#160;<a
+             href="{fn:data($article/xm:article/@uri)}" target="external">{fn:data($article/xm:article/@title)}</a>&#8314;<sup>{fn:data($article/xm:article/@type)}</sup></li>
+             else
+             <li>{fn:data($article/xm:article/@date)} &#160;<a
+             href="{fn:document-uri($article)}">{fn:data($article/xm:article/@title)}</a></li>
+            }
           </ul>
-        </section>
-        <br/>
+        </nav>
         <footer>
-          <p>This is the footer</p>
+	  &#169; 2011 <strong> Webcomposite</strong> s.r.o. All rights reserved.  
         </footer>
       </body>
     </html>
   </path>
 
-  <path url="/head" content-type="text/html" method="GET">
-    <head xmlns="http://www.w3.org/1999/xhtml">
-      <meta charset="UTF-8"/>
-      <title>user: { mx:session('user') }</title>
-      <link  href="http://fonts.googleapis.com/css?family=Cardo:regular" rel="stylesheet" type="text/css" />
-      <link type="text/css" rel="stylesheet" href="/resource/css/style.css"/>
-    </head>
-  </path>
-
-  <path url="/nav" content-type="text/html" method="GET">
-      <div xmlns="http://www.w3.org/1999/xhtml">
-        <p>
-          email: <a href="mailto:jim@xmlmonks.com" rel="">jim@xmlmonks.com</a>
-          twitter: <a href="http://www.twitter.com/xmlmonks" rel="external">@xmlmonks</a>
-        </p>
-      </div>
-  </path>
 
   <path url="/userprofile" type="template" content-type="text/html" data="/d/people"
         method="GET">

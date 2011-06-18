@@ -1,0 +1,11 @@
+body {  font-family: 'Cantarell', arial, serif; font-size: 125%;width: 90%; padding:25px; padding-top: 0; margin-top: 0;}
+a:link, a:visited {border:none;text-decoration:underline;font-style:normal;color:black;}
+a:hover {text-decoration: none;color: #a3211f;}
+h1 { text-align:right;}
+h2 { padding-top: 3px; padding-left:5px; height:27px; background-color: #cccccc; font-size: 75%; }
+footer { font-size: 75%;font-style:italic;}
+.search {float:right; padding-right:3px;}
+.contacts {float:left; text-align:left; font-size: 40%;
+           padding-right:3px; color:  #cccccc; }
+sup{color: #cccccc; font-size:65%;}
+
