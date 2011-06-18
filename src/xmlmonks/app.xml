@@ -99,18 +99,26 @@
       <xsl:variable name="uri" select="document-uri(.)"/>
       <xsl:template match="xm:section">
         <div class="article">
+          <span class="date"><xsl:value-of select="../@date"/></span>&#160;
           <xsl:for-each select="xdmp:document-get-collections($uri)[. ne
           'articles']"> 
           <span class="tags"><xsl:value-of select="."/></span>&#160;
           </xsl:for-each>
            <xsl:apply-templates select="*"/>
+          <span class="author">--<xsl:value-of select="../@author"/></span>
         </div>
       </xsl:template>
       <xsl:template match="xm:title">
         <h3><xsl:value-of select="text()"/></h3>
       </xsl:template>
       <xsl:template match="xm:para">
-        <p><xsl:value-of select="text()"/></p>
+        <p><xsl:apply-templates select="node()"/></p>
+      </xsl:template>
+      <xsl:template match="xm:link">
+        <a href="{@href}" target="link"><xsl:apply-templates select="node()"/></a>
+      </xsl:template>
+      <xsl:template match="xm:code">
+        <script src="{@src}"></script>
       </xsl:template>
       </xsl:stylesheet>
   </path>
@@ -222,6 +230,7 @@
 
   <path url="/c/footer" content-type="text/html" method="GET">
     <footer xmlns="http://www.w3.org/1999/xhtml">
+      <br/><br/><br/><br/>
       &#169; 2011 <strong> Webcomposite</strong> s.r.o. All rights reserved.  
     </footer>
   </path>

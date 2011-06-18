@@ -9,11 +9,13 @@ footer { font-size: 65%;font-style:italic;float:right;}
 sup{opacity:0.6;-moz-opacity:0.6;font-size:65%;}
 sup.beta{color:  #a3211f; font-size:50%;opacity:0.6;-moz-opacity:0.6;}
 span.tags {font-size:75%;padding:2px;display:inline;color: #000000;background-color:#cccccc;}
+
 ul { padding-top:0;margin: 5; padding-left:50; list-style-type: none; }
 li { margin: 9;}
 a.current{text-decoration: none; color: #a3211f}
 a.altlink{color: #a3211f;opacity:0.6;-moz-opacity:0.6;}
 span.date{font-size: 75%; opacity:0.6;-moz-opacity:0.6}
+span.author{float:right;font-size: 75%; opacity:0.6;-moz-opacity:0.6}
 .ui-menu {
         list-style:none;
         padding: 2px;
@@ -38,4 +40,4 @@ span.date{font-size: 75%; opacity:0.6;-moz-opacity:0.6}
     list-style-type: none;
     margin: 0;
 }
-div.article{padding-top:0;margin: 5; padding-left:59;}
+div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
