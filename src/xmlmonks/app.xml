@@ -33,7 +33,7 @@
               <term-option>case-insensitive</term-option>
             </options>
             return
-            for $article in search:search(fn:concat("*",$search,"*"),$options)//search:result/@uri
+            for $article in search:search($search,$options)//search:result/@uri
             return
                 fn:doc($article)            
               else if (mx:param('tag') eq 'recent') then
