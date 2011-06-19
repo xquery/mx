@@ -42,3 +42,13 @@ div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
     list-style-type: none;
     margin: 0;
 }
+.slidingDiv {
+	height:100px;
+	background-color: #99CCFF;
+	padding:20px;
+	margin-top:10px;
+	border-bottom:5px solid #3399FF;
+}
+.show_hide {
+	display:none;
+}

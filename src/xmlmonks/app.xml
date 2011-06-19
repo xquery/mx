@@ -44,7 +44,7 @@
               else
                 fn:collection((mx:param('tag'),'articles')[1])
             return
-            for $article in $result
+            for $article at $count in $result
              order by $article/xm:article/@date descending
              return
              if($article/xm:article/@type) then
@@ -53,13 +53,23 @@
              xdmp:document-get-collections(fn:document-uri($article))[. ne
              'articles']
              return
-             (<span class="tags" onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
+             (<span class="tags"  onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;<a
              href="{fn:data($article/xm:article/@uri)}"
-             target="external">{fn:data($article/xm:article/@title)}</a>
-             <sup> &#8594;{fn:data($article/xm:article/@type)}</sup>
+             target="external">{fn:data($article/xm:article/@title)}</a><sup onmouseout='$("#a{$count}").slideToggle();' onmouseover='$("#a{$count}").slideToggle();'>&#8594;</sup>
+             <sup>{fn:data($article/xm:article/@type)}</sup>
+
+             {if ($article/xm:comment) then
+             <div id="a{$count}" class="slidingDiv">
+               <i>{$article/xm:comment}</i>
+             </div>
+             else
+              ()
+             }
              </li>
+
+
              else
              <li>
              {for $tag in
