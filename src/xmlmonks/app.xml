@@ -57,7 +57,9 @@
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;<a
              href="{fn:data($article/xm:article/@uri)}"
-             target="external">{fn:data($article/xm:article/@title)}</a><sup onmouseout='$("#a{$count}").slideToggle();' onmouseover='$("#a{$count}").slideToggle();'>&#8594;>{fn:data($article/xm:article/@type)}</sup>
+             target="external"
+             >{fn:data($article/xm:article/@title)}</a><sup
+             class="link" onclick='$("#a{$count}").slideToggle();'>&#8594;>{fn:data($article/xm:article/@type)}</sup>
 
              {if ($article/xm:article/xm:comment) then
              <div id="a{$count}" class="slidingDiv">
@@ -255,7 +257,11 @@
       &#169; 2011 <strong>Jim Fuller</strong>, content contained on
       this site is licensed under <a
       href="http://creativecommons.org/licenses/by-nc/2.0/"
-      target="license">Creative Commons 2.0</a>.
+      target="license">Creative Commons 2.0</a>.<br/> Powered by
+<a href="http://www.marklogic.com" target="MarkLogic">
+MarkLogic Server
+<span class="server-version">4.2-4</span> Community License.
+</a>
     </footer>
   </path>
 

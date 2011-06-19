@@ -10,6 +10,7 @@ footer { font-size: 65%;font-style:italic;float:right;}
 .contacts { font-family: 'Inconsolata', arial, serif; float:left; text-align:left; font-size: 35%; padding-right:3px; color:  #cccccc; }
 sup{opacity:0.6;-moz-opacity:0.6;font-size:65%;}
 sup.beta{color:  #a3211f; font-size:50%;opacity:0.6;-moz-opacity:0.6;}
+sup.link{Cursor: pointer;opacity:0.6;-moz-opacity:0.6;font-size:65%;}
 ul { padding-top:0;margin: 5; padding-left:50; list-style-type: none; }
 li { margin: 9;}
 span.date{font-size: 75%; opacity:0.6;-moz-opacity:0.6}
