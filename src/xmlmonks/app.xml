@@ -9,8 +9,6 @@
 
   <!-- http redirection //-->
    
-  <path url="/a/test" type="forward">/monastery</path>
-
   <path url="/articles/XML+Monks+launched" type="forward">/mx-controller.xqy?tag=&amp;mode=handler&amp;url=%2Farticle&amp;href=&amp;ns=&amp;content-type=text%2Fhtml&amp;method=GET&amp;uri=/content/articles/xmlmonks.xml</path>
 
   <!-- inline //-->
@@ -38,7 +36,12 @@
             for $article in search:search(fn:concat("*",$search,"*"),$options)//search:result/@uri
             return
                 fn:doc($article)            
-              else 
+              else if (mx:param('tag') eq 'recent') then
+                fn:subsequence(for $article in
+                fn:collection('articles') order by
+                $article/xm:article/@date descending return $article
+ ,1,10)
+              else
                 fn:collection((mx:param('tag'),'articles')[1])
             return
             for $article in $result
@@ -114,12 +117,19 @@
       <xsl:template match="xm:para">
         <p><xsl:apply-templates select="node()"/></p>
       </xsl:template>
+      <xsl:template match="xm:b">
+        <b><xsl:apply-templates select="node()"/></b>
+      </xsl:template>
+      <xsl:template match="xm:i">
+        <i><xsl:apply-templates select="node()"/></i>
+      </xsl:template>
       <xsl:template match="xm:link">
         <a href="{@href}" target="link"><xsl:apply-templates select="node()"/></a>
       </xsl:template>
       <xsl:template match="xm:code">
         <script src="{@src}"></script>
       </xsl:template>
+
       </xsl:stylesheet>
   </path>
 
