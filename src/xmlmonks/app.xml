@@ -241,7 +241,10 @@
   <path url="/c/footer" content-type="text/html" method="GET">
     <footer xmlns="http://www.w3.org/1999/xhtml">
       <br/><br/><br/><br/>
-      &#169; 2011 <strong> Webcomposite</strong> s.r.o. All rights reserved.  
+      &#169; 2011 <strong>Jim Fuller</strong>, content contained on
+      this site is licensed under <a
+      href="http://creativecommons.org/licenses/by-nc/2.0/"
+      target="license">Creative Commons 2.0</a>.
     </footer>
   </path>
 
