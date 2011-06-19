@@ -18,13 +18,13 @@ span.author{float:right;font-size: 75%; opacity:0.6;-moz-opacity:0.6}
 span.submit{Cursor: pointer;border:}
 span.submit:hover{Cursor: pointer;  opacity:0.6;-moz-opacity:0.6;color: #a3211f}
 
-span.dev{font-size:85%;padding:2px;display:inline;background-color:#EEFFDD;}
-span.xml{font-size:85%;padding:2px;display:inline;background-color:#D1AC4C;}
-span.ruminate{font-size:85%;padding:2px;display:inline;background-color:#A0EAF2;}
-span.xslt{font-size:85%;padding:2px;display:inline;background-color:#03A6A6;}
-span.xproc{font-size:85%;padding:2px;display:inline;background-color:#FFCD72;}
-span.xquery{font-size:85%;padding:2px;display:inline;background-color:#4982A6;}
-span.web{font-size:85%;padding:2px;display:inline;background-color:#DDCCBB;}
+span.dev{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.xml{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.ruminate{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.xslt{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.xproc{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.xquery{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
+span.web{font-size:85%;padding:2px;display:inline;background-color:#cccccc;}
 
 span.tags {font-size:75%;padding:2px;display:inline;background-color:#cccccc;}
 
