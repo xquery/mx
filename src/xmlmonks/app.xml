@@ -57,12 +57,11 @@
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;<a
              href="{fn:data($article/xm:article/@uri)}"
-             target="external">{fn:data($article/xm:article/@title)}</a><sup onmouseout='$("#a{$count}").slideToggle();' onmouseover='$("#a{$count}").slideToggle();'>&#8594;</sup>
-             <sup>{fn:data($article/xm:article/@type)}</sup>
+             target="external">{fn:data($article/xm:article/@title)}</a><sup onmouseout='$("#a{$count}").slideToggle();' onmouseover='$("#a{$count}").slideToggle();'>&#8594;>{fn:data($article/xm:article/@type)}</sup>
 
-             {if ($article/xm:comment) then
+             {if ($article/xm:article/xm:comment) then
              <div id="a{$count}" class="slidingDiv">
-               <i>{$article/xm:comment}</i>
+               <i>{$article/node()}</i>
              </div>
              else
               ()

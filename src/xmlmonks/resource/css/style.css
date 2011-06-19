@@ -43,11 +43,19 @@ div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
     margin: 0;
 }
 .slidingDiv {
-	height:100px;
-	background-color: #99CCFF;
-	padding:20px;
-	margin-top:10px;
-	border-bottom:5px solid #3399FF;
+	height:50px;
+        background-color::#cccccc;
+        padding-left:30;
+        padding-right:30;
+        font-family: 'Inconsolata', arial, serif;
+	margin-top:15px;
+        width:75%;
+        padding-top:10;
+        padding-bottom:0;
+	border-bottom:1px solid #a3211f;
+	border-top:1px solid #a3211f;
+        opacity:0.6;-moz-opacity:0.6;
+        font-size:75%;
 }
 .show_hide {
 	display:none;
