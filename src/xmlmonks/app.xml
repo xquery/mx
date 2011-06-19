@@ -53,7 +53,9 @@
              xdmp:document-get-collections(fn:document-uri($article))[. ne
              'articles']
              return
-             (<span class="tags"  onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
+             (<span class="{$tag}"><a
+             href="/monastery?tag={$tag}" 
+             style="text-decoration:none;">{$tag}</a></span>,'&#160;')
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;&#160;&#160;<a
              href="{fn:data($article/xm:article/@uri)}" 
@@ -80,7 +82,9 @@
              xdmp:document-get-collections(fn:document-uri($article))[. ne
              'articles']
              return
-             (<span class="tags" onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
+             (<span class="{$tag}"><a
+             href="/monastery?tag={$tag}" 
+             style="text-decoration:none;">{$tag}</a></span>,'&#160;')
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;&#160;&#160;<a
              href="/articles/{fn:replace(fn:data($article/xm:article/@title),'
@@ -119,7 +123,9 @@
           <span class="date"><xsl:value-of select="../@date"/></span>&#160;
           <xsl:for-each select="xdmp:document-get-collections($uri)[. ne
           'articles']"> 
-          <span class="tags"><xsl:value-of select="."/></span>&#160;
+          <span class="{.}"><a
+             href="/monastery?tag={.}" 
+             style="text-decoration:none;"><xsl:value-of select="."/></a></span>&#160;
           </xsl:for-each>
            <xsl:apply-templates select="*"/>
           <span class="author">--<xsl:value-of select="../@author"/></span>
@@ -197,22 +203,29 @@
             <a href="/monastery?tag=recent" class="{if (mx:param('tag') eq
             'recent' and fn:not(mx:param('search'))) then 'current' else ()}">Recent</a>
             | <a href="/monastery?tag=" class="{if
-            (fn:empty(mx:param('tag') and fn:not(mx:param('search')))
-            ) then 'current' else ()}">All</a>
+            (fn:empty(mx:param('tag')) and fn:not(mx:param('search')))
+             then 'current' else ()}">All</a>
             | <a href="/monastery?tag=ruminate"  class="{if (mx:param('tag') eq
-            'ruminate' and fn:not(mx:param('search'))) then 'current' else ()}">Ruminations</a>
+            'ruminate' and fn:not(mx:param('search'))) then 'current'
+            else ()}"><span class="ruminate">Ruminations</span></a>
             | <a href="/monastery?tag=xml" class="{if (mx:param('tag') eq
-            'xml' and fn:not(mx:param('search'))) then 'current' else ()}">XML</a>
+            'xml' and fn:not(mx:param('search'))) then 'current' else
+            ()}"><span class="xml">XML</span></a>
             | <a href="/monastery?tag=xquery" class="{if (mx:param('tag') eq
-            'xquery' and fn:not(mx:param('search'))) then 'current' else ()}">XQuery</a>
+            'xquery' and fn:not(mx:param('search'))) then 'current'
+            else ()}"><span class="xquery">XQuery</span></a>
             | <a href="/monastery?tag=xproc" class="{if (mx:param('tag') eq
-            'xproc' and fn:not(mx:param('search'))) then 'current' else ()}">XProc</a> 
+            'xproc' and fn:not(mx:param('search'))) then 'current'
+            else ()}"><span class="xproc">XProc</span></a> 
             | <a href="/monastery?tag=xslt" class="{if (mx:param('tag') eq
-            'xslt' and fn:not(mx:param('search'))) then 'current' else ()}">XSLT</a>
+            'xslt' and fn:not(mx:param('search'))) then 'current' else
+            ()}"><span class="xslt">XSLT</span></a>
             | <a href="/monastery?tag=web" class="{if (mx:param('tag') eq
-            'web' and fn:not(mx:param('search'))) then 'current' else ()}">Web</a>
+            'web' and fn:not(mx:param('search'))) then 'current' else
+            ()}"><span class="web">Web</span></a>
             | <a href="/monastery?tag=dev" class="{if (mx:param('tag') eq
-            'dev' and fn:not(mx:param('search'))) then 'current' else ()}">Dev</a>
+            'dev' and fn:not(mx:param('search'))) then 'current' else
+            ()}"><span class="dev">Dev</span></a>
             <span class="search"><form id="searchform" action="/monastery" method="GET"><input id="search" name="search" size="20"
             type="text" value="{mx:param('search')}"/>&#160; <span
             onclick="$('#searchform').submit()" class="submit">search</span></form></span>

@@ -4,7 +4,7 @@ a:hover {text-decoration: none;color: #a3211f;}
 a.current{text-decoration: none; color: #a3211f}
 a.altlink{color: #a3211f;opacity:0.6;-moz-opacity:0.6;}
 h1 { text-align:right; margin-right:-10px; margin-left:5px;}
-h2 { padding-top: 3px; padding-left:5px; height:30px; background-color: #cccccc; font-size: 75%; }
+h2 { padding-top: 3px; padding-left:5px; height:30px; background-color: #cccccc; font-size: 80%; }
 footer { font-size: 65%;font-style:italic;float:right;}
 .search {float:right; padding-right:10px;}
 .contacts { font-family: 'Inconsolata', arial, serif; float:left; text-align:left; font-size: 35%; padding-right:3px; color:  #cccccc; }
@@ -17,7 +17,18 @@ span.date{font-size: 75%; opacity:0.6;-moz-opacity:0.6}
 span.author{float:right;font-size: 75%; opacity:0.6;-moz-opacity:0.6}
 span.submit{Cursor: pointer;border:}
 span.submit:hover{Cursor: pointer;  opacity:0.6;-moz-opacity:0.6;color: #a3211f}
-span.tags {font-size:75%;padding:2px;display:inline;color: #000000;background-color:#cccccc;}
+
+span.dev{font-size:85%;padding:2px;display:inline;background-color:#EEFFDD;}
+span.xml{font-size:85%;padding:2px;display:inline;background-color:#D1AC4C;}
+span.ruminate{font-size:85%;padding:2px;display:inline;background-color:#A0EAF2;}
+span.xslt{font-size:85%;padding:2px;display:inline;background-color:#03A6A6;}
+span.xproc{font-size:85%;padding:2px;display:inline;background-color:#FFCD72;}
+span.xquery{font-size:85%;padding:2px;display:inline;background-color:#4982A6;}
+span.web{font-size:85%;padding:2px;display:inline;background-color:#DDCCBB;}
+
+span.tags {font-size:75%;padding:2px;display:inline;background-color:#cccccc;}
+
+
 div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
 .ui-menu {
         list-style:none;
