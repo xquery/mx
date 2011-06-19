@@ -55,22 +55,25 @@
              return
              (<span class="tags"  onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
              }
-             <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;<a
-             href="{fn:data($article/xm:article/@uri)}"
+             <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;&#160;&#160;<a
+             href="{fn:data($article/xm:article/@uri)}" 
              target="external"
+             onclick='$("#a{$count}").slideToggle();return false'
              >{fn:data($article/xm:article/@title)}</a><sup
-             class="link" onclick='$("#a{$count}").slideToggle();'>&#8594;>{fn:data($article/xm:article/@type)}</sup>
+             class="link">&#8594;><a
+             href="{fn:data($article/xm:article/@uri)}" 
+             target="external" style="text-decoration:none;">{fn:data($article/xm:article/@type)}</a></sup>
 
              {if ($article/xm:article/xm:comment) then
              <div id="a{$count}" class="slidingDiv">
-               <i>{$article/node()}</i>
+               <i>{$article/xm:article/xm:comment/text()}</i><a
+             href="{fn:data($article/xm:article/@uri)}" 
+             target="external" style="float:right;font-size:90%;">GO TO LINK</a>
              </div>
              else
               ()
              }
              </li>
-
-
              else
              <li>
              {for $tag in
@@ -79,7 +82,7 @@
              return
              (<span class="tags" onclick="alert('load {$tag}')">{$tag}</span>,'&#160;')
              }
-             <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;<a
+             <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;&#160;&#160;<a
              href="/articles/{fn:replace(fn:data($article/xm:article/@title),'
              ','+')}">{fn:data($article/xm:article/@title)}</a>
              </li>

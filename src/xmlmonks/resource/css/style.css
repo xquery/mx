@@ -44,7 +44,7 @@ div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
     margin: 0;
 }
 .slidingDiv {
-	height:50px;
+	height:60px;
         background-color::#cccccc;
         padding-left:30;
         padding-right:30;
@@ -55,7 +55,7 @@ div.article{margin:0;padding-top:0;padding-left:59; width:90%;}
         padding-bottom:0;
 	border-bottom:1px solid #a3211f;
 	border-top:1px solid #a3211f;
-        opacity:0.6;-moz-opacity:0.6;
+        opacity:0.9;-moz-opacity:0.9;
         font-size:75%;
 }
 .show_hide {
