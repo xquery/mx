@@ -89,7 +89,7 @@
              style="text-decoration:none;">{$tag}</a></span>,'&#160;')
              }
              <span class="date">{fn:data($article/xm:article/@date)}</span> &#160;&#160;&#160;<a
-             href="/articles/{fn:data($article/xm:articles/@date)}/{fn:replace(fn:data($article/xm:article/@title),'
+             href="/articles/{fn:data($article/xm:article/@date)}/{fn:replace(fn:data($article/xm:article/@title),'
              ','+')}">{fn:data($article/xm:article/@title)}</a>
              </li>
             }
