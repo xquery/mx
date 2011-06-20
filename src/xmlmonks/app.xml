@@ -9,7 +9,7 @@
 
   <!-- http redirection //-->
 
-  <path url="/" type="redirect">/monastery</path>
+  <path url="/" type="redirect">/monastery?tag=recent</path>
    
   <path url="/articles/XML+Monks+launched" type="forward">/mx-controller.xqy?tag=&amp;mode=handler&amp;url=%2Farticle&amp;href=&amp;ns=&amp;content-type=text%2Fhtml&amp;method=GET&amp;uri=/content/articles/xmlmonks.xml</path>
 
