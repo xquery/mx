@@ -52,7 +52,7 @@
              order by $article/xm:article/@date descending
              return
              if($article/xm:article/@type) then
-             <li><a name="{$article/xm:article/@uri}"/>
+             <li><a name="{$article/xm:article/@title}"/>
              {for $tag in
              xdmp:document-get-collections(fn:document-uri($article))[. ne
              'articles']
@@ -81,7 +81,7 @@
              }
              </li>
              else
-             <li><a name="{$article/xm:article/@uri}"/>
+             <li><a name="{$article/xm:article/@title}"/>
              {for $tag in
              xdmp:document-get-collections(fn:document-uri($article))[. ne
              'articles']
