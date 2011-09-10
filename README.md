@@ -25,14 +25,12 @@ https://github.com/dscape/mustache.xq
 
 ## Dist
 
+src/test-app - contains test application that uses mx.xqm
 
-        src/test-app - contains test application that uses mx.xqm
-
-        src/xquery - contains mx.xqm library and mx-controller.xqy
+src/xquery - contains mx.xqm library and mx-controller.xqy
 
 
 ## Installation of test-app
-
 
 You need to  ensure you have a MarkLogic database and application
 server setup. 
@@ -50,26 +48,20 @@ Once you have a working MarkLogic HTTP application server running then;
         declare variable $mx:app := mx:map( xdmp:document-get('TO YOUR OWN PATH app.xml'));
 
 
-In application server;
+In the ML application server set the following;
 
-    set root to where src/test-app is located 
+    set root to where src/test-app is located in your environment
 
     set url rewriter to /mx-controller.xqy?mode=rewrite
 
     set error handler to /mx-controller.xqy?mode=error
 
-    ensure /lib/mx.xqm is in lib directory of test-app (its symlinked
-    from src/xquery/mx.xqm)
-
 Once you have done the above you should be able to access the test-app
 
     ex. http://localhost:9000/mx?flush=true
 
-review src/test-app/app.xml
-
 
 ## Overview
-
 
 src/test-app/app.xml - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
@@ -79,17 +71,16 @@ new changes or make a change to app.xml)
 The best way to learn what MX does and how to build applications with
 it is to review app.xml
 
-  * passthru - will allow HTTP requests through
-  * http redirection - will either forward or redirect HTTP request
-  * inline tests - Shows how to 
-  * data - how to setup models 
-  * module - how to invoke xquery modules
-  * example templates (views) -
-
-          /template1 - shows how to use mustache.xq and data model (/data7.test)
-          /template2 - shows how to use xslt template
-          /template3 - shows how to use xquery module to supply data to xslt transformation
-  * json - there are some experiemental json stuff as well
+* passthru - will allow HTTP requests through
+* http redirection - will either forward or redirect HTTP request
+* inline tests - Shows how to 
+* data - how to setup models 
+* module - how to invoke xquery modules
+* example templates (views) -
+  /template1 - shows how to use mustache.xq and data model (/data7.test)
+  /template2 - shows how to use xslt template
+  /template3 - shows how to use xquery module to supply data to xslt transformation
+* json - there are some experiemental json stuff as well
 
 
 ## Using in your own XQuery Applications
@@ -109,22 +100,19 @@ however way you want your modules, templates, etc.
 
 ## URL Params
 
-
 appending the following url params to any url 
 
-          debug=true - will display underlying XML and HTTP Request information
-
-          flush=true - will force app.xml to reload into server field
+* debug=true - will display underlying XML and HTTP Request information
+* flush=true - will force app.xml to reload into server field
 
 
 ## Resources
 
+MX github: http://www.github.com/xquery/mx
 
-        MX github: http://www.github.com/xquery/mx
+XSGI: previous experiment for use with eXist XML Database (http://code.google.com/p/xsgi/)
 
-        XSGI: previous experiment for use with eXist XML Database (http://code.google.com/p/xsgi/)
-
-        Martin Fowler's Harvested Frameworks does a good job at capturing how MX was developed.
+Martin Fowler's Harvested Frameworks does a good job at capturing how MX was developed.
 
 
 ## Acknowledgements
@@ -133,14 +121,8 @@ appending the following url params to any url
 Many of the principles embedded in MX were inspired by active/passive
 observations and conversations with some of my MarkLogic colleagues;
 
-Alex Beasdale
-,Micah Dubinko
-,Philip Fennel
-,Nuno Job
-,Justin Makeig
-,Olav Schrewing
-,Pete Aven
-,Norman Walsh
+Alex Beasdale, Micah Dubinko, Philip Fennel, Nuno Job, Justin Makeig,
+Olav Schrewing, Pete Aven, Norman Walsh
 
 Though of course, I take all the blame for anything incorrect, broken or plain stupid.
 
