@@ -3,7 +3,7 @@
 MX is designed to provide a 'starting point' for developing MarkLogic XQuery web applications.
 
 It is a 'work in progress' and a testbed for trying out things, so
-please excuse the unfinished touches.
+please excuse the general unfinished state.
 
 ## Website
 
@@ -29,6 +29,8 @@ src/test-app - contains test application that uses mx.xqm
 
 src/xquery - contains mx.xqm library and mx-controller.xqy
 
+tests -  there are tests for mx but I have opted to not include them
+in the dist for the time being
 
 ## Installation of test-app
 
@@ -47,7 +49,6 @@ Once you have a working MarkLogic HTTP application server running then;
 
         declare variable $mx:app := mx:map( xdmp:document-get('TO YOUR OWN PATH app.xml'));
 
-
 In the ML application server set the following;
 
     set root to where src/test-app is located in your environment
@@ -59,7 +60,6 @@ In the ML application server set the following;
 Once you have done the above you should be able to access the test-app
 
     ex. http://localhost:9000/mx?flush=true
-
 
 ## Overview
 

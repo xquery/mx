@@ -41,6 +41,13 @@ declare variable $mx:mustache        := xdmp:function(fn:QName('mustache.xq','re
 declare variable $mx:xmlToJSON       := xdmp:function(fn:QName('http://marklogic.com/json','xmlToJSON'), $mx:mljson-path);
 declare variable $mx:jsonToXML       := xdmp:function(fn:QName('http://marklogic.com/json','jsonToXML'), $mx:mljson-path);
 
+
+(:
+  mx:rewrite - manages rewriting functionality by matching url to app.xml entry and uses mx:constructURL to rewrite
+
+  @param $originalURL - original URL  
+  @param $app-map - app.xml 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
   declare function mx:rewrite($originalURL as xs:string, $app-map as map:map) as xs:string {
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -75,6 +82,12 @@ declare variable $mx:jsonToXML       := xdmp:function(fn:QName('http://marklogic
                <param name='url' value='{$requestURL}'/>))
 };
 
+(:
+  mx:handle-response  - 
+
+  @param $req -
+  @param $app-map - app.xml 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:handle-request($req as element(mx:request), $app-map as map:map){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -97,6 +110,12 @@ declare function mx:handle-request($req as element(mx:request), $app-map as map:
         mx:handle-error($req)
 };
 
+(:
+  mx:dispatch - 
+
+  @param $req - 
+  @param $match - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:dispatch($req,$match) as item()* {
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -122,12 +141,24 @@ declare function mx:dispatch($req,$match) as item()* {
           ()
 };
 
+(:
+  mx:handle-response - returns response back with appropriate content type
+
+  @param $content-type - 
+  @param $content - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:handle-response($content-type, $content) as item()* {
 (: -------------------------------------------------------------------------------------------------------- :)
 	(xdmp:set-response-content-type($content-type),$content)
 };
 
+
+(:
+  mx:handle-error - generates error dump containing original request
+
+  @param $req - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:handle-error($req) as element(mx:error){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -136,6 +167,13 @@ declare function mx:handle-error($req) as element(mx:error){
 </mx:error>
 };
 
+
+(:
+  mx:handle-debug - when url param debug=true, returns debugging information 
+
+  @param $req - 
+  @param $app-map - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:handle-debug($req as element(mx:request),$app-map as map:map) as element(mx:debug){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -145,18 +183,39 @@ declare function mx:handle-debug($req as element(mx:request),$app-map as map:map
 </mx:debug>
 };
 
+
+(:
+  mx:invoke - 
+
+  @param $href - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:invoke($href as xs:string){
 (: -------------------------------------------------------------------------------------------------------- :)
  xdmp:invoke($href)
 };
 
+
+(:
+  mx:inovke - 
+
+  @param $href - 
+  @param $vars - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:invoke($href as xs:string, $vars as item()*){
 (: -------------------------------------------------------------------------------------------------------- :)
  xdmp:invoke($href)
 };
 
+
+(:
+  mx:invoke - 
+
+  @param $href - 
+  @param $vars - 
+  @param $ns - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:invoke($href as xs:string, $vars as item()*, $ns){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -180,12 +239,19 @@ return
 };
 
 
+(:
+  mx:delete-cache - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:delete-cache() {
 (: -------------------------------------------------------------------------------------------------------- :)
 xdmp:set-server-field('mx:cache',())
 };
 
+
+(:
+  mx:cache - manages init of inline caching applied to functions
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:cache() {
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -198,18 +264,32 @@ else
   xdmp:get-server-field('mx:cache')
 };
 
+
+(:
+  mx:delete-map - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:delete-map() {
 (: -------------------------------------------------------------------------------------------------------- :)
 xdmp:set-server-field('mx:map',())
 };
 
+
+(:
+  mx:map - returns mx:map field containing app.xml map 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:map() {
 (: -------------------------------------------------------------------------------------------------------- :)
     xdmp:get-server-field('mx:map')
 };
 
+
+(:
+  mx:map - init server field containing map
+
+  @param $app - map:map  
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:map($app) as map:map{
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -236,6 +316,10 @@ else
 
 };
 
+
+(:
+  mx:constructURL  - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:constructURL($urlPath as xs:string, $querystring as xs:string, $addParam as element(param)* ) as xs:string{
 (: -------------------------------------------------------------------------------------------------------- :) 
@@ -254,17 +338,28 @@ return
     fn:concat($urlPath,'?',$querystring,'&amp;',$paramstring)
 };
 
+(:
+  mx:param - get param from HTTP Request
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:param($name as xs:string) as item()*{
 (: -------------------------------------------------------------------------------------------------------- :)
     mx:get-request()/*:params/*[fn:local-name(.) eq $name]/node()
 };
+
+(:
+  mx:session - get session from HTTP Request
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:session($name as xs:string) as item()*{
 (: -------------------------------------------------------------------------------------------------------- :)
     mx:get-request()/*:session-fields/*[fn:local-name(.) eq $name]/node()
 };
 
+
+(:
+  mx:data - invoke data url
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:data($path as xs:string) as item()*{
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -288,6 +383,10 @@ declare function mx:data($path as xs:string) as item()*{
      $app-map )
 };
 
+
+(:
+  mx:data - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:data($path as xs:string, $params as item()*) as item()*{
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -317,6 +416,10 @@ declare function mx:data($path as xs:string, $params as item()*) as item()*{
          $app-map )
 };
 
+
+(:
+  mx:eval - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:eval($query as xs:string){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -330,6 +433,10 @@ return
   xdmp:eval(fn:concat($preamble,$query))
 };
 
+
+(:
+  mx:memoize - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:memoize($func,$req, $content){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -346,6 +453,10 @@ declare function mx:memoize($func,$req, $content){
         ($result,mx:log(fn:concat('mx:cache key generated: ',$key)))
  }; 
 
+
+(:
+  mx:log - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:log($message){
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -355,6 +466,10 @@ declare function mx:log($message){
      ()
 };
 
+
+(:
+  mx:get-request - 
+:)
 (: -------------------------------------------------------------------------------------------------------- :)
 declare function mx:get-request() as element(mx:request) {
 (: -------------------------------------------------------------------------------------------------------- :)
@@ -403,6 +518,3 @@ declare function mx:get-request() as element(mx:request) {
     }
   }
 };
-
-
-
