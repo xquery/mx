@@ -121,7 +121,7 @@ Martin Fowler's Harvested Frameworks does a good job at capturing how MX was dev
 Many of the principles embedded in MX were inspired by active/passive
 observations and conversations with some of my MarkLogic colleagues;
 
-Alex Beasdale, Micah Dubinko, Philip Fennel, Nuno Job, Justin Makeig,
+Alex Bleasdale, Micah Dubinko, Philip Fennel, Nuno Job, Justin Makeig,
 Olav Schrewing, Pete Aven, Norman Walsh
 
 Though of course, I take all the blame for anything incorrect, broken or plain stupid.
