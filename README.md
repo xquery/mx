@@ -79,42 +79,33 @@ new changes or make a change to app.xml)
 The best way to learn what MX does and how to build applications with
 it is to review app.xml
 
-  passthru - will allow HTTP requests through
-
-  http redirection - will either forward or redirect HTTP request
-
-  inline tests - Shows how to 
-
-  data - how to setup models 
-
-  module - how to invoke xquery modules
-
-  example templates (views) -
+  * passthru - will allow HTTP requests through
+  * http redirection - will either forward or redirect HTTP request
+  * inline tests - Shows how to 
+  * data - how to setup models 
+  * module - how to invoke xquery modules
+  * example templates (views) -
 
           /template1 - shows how to use mustache.xq and data model (/data7.test)
           /template2 - shows how to use xslt template
           /template3 - shows how to use xquery module to supply data to xslt transformation
-
-  json - there are some experiemental json stuff as well
+  * json - there are some experiemental json stuff as well
 
 
 ## Using in your own XQuery Applications
 
+At a minimum you need 3 things;
 
-At a minimum you will need
+* mx.xqm - single module for mx
+* mx-controller.xqy - just edit path
+* app.xml - application specific
 
-    Copy app.xml and mx-controller.xqy to root HTTP application server
-    directory. 
-
-    Edit mx-controller.xqy to load app.xml
-
-    Copy mx.xqm to directory named 'lib' under root HTTP application server
-
-    If you want to use mustache.xq templates then you will need to
-    install in /lib directory
+I have tried not to make too much 'ceremony' e.g. its left to you how
+you want to do things.
 
 Obviously you will need to edit app.xml, but you are free to setup
 however way you want your modules, templates, etc.
+
 
 ## URL Params
 
