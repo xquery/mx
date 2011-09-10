@@ -30,18 +30,16 @@
     </html>
   </path>
   <path url="/inline3.test" content-type="text/xml" method="GET" href="/static-test.html"/>
+  <path url="/inline4.test" type="inline" content-type="text/html" method="GET"
+        description="show embedded xquery">
+    <html>
+      <body>
+        <h1>inline test</h1>
+        <p>{fn:current-time()}</p>
+      </body>
+    </html>
+  </path>
 
-  <!-- json //-->
-  <path url="/json.xml" type="inline" content-type="text/plain"
-        convert="json2xml" method="GET" description="">
-{"repositories":[{"url":"https://github.com/xquery/xprocxq","watchers":2,"language":"XQuery","pushed_at":"2011/06/03 13:48:18 -0700","has_wiki":true,"open_issues":0,"created_at":"2011/05/06 14:42:18 -0700","fork":false,"has_issues":true,"description":"implementation of xproc in xquery","size":4744,"private":false,"name":"xprocxq","forks":1,"owner":"xquery","has_downloads":true,"homepage":""}]}
-  </path>
-  <path url="/xml.json" type="inline" content-type="application/json"
-        convert="xml2json" method="GET" description="">
-    <json type="object">
-      <a type="string">test test</a>
-    </json>
-  </path>
 
   <!-- data //-->
   <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
@@ -123,17 +121,30 @@
     </xsl:stylesheet>
   </path>
 
-
   <!-- default MX (required for MX build/test) //-->
   <path url="/mx" method="GET" type="inline" content-type="text/html" description="MX status page">
     <html>
       <body>
         <h1>MX Status Page</h1>
+        <p>{fn:current-time()}</p>
       </body>
     </html>
   </path>
   <path url="/mx/map" method="GET" content-type="text/plain">
     mx:map()
+  </path>
+
+
+  <!-- json (EXPIREMENTAL!) //-->
+  <path url="/xml.json" type="inline" content-type="application/json"
+        convert="xml2json" method="GET" description="">
+    <json type="object">
+      <a type="string">test test</a>
+    </json>
+  </path>
+  <path url="/json.xml" type="inline" content-type="text/plain"
+        convert="json2xml" method="GET" description="">
+{"repositories":[{"url":"https://github.com/xquery/xprocxq","watchers":2,"language":"XQuery","pushed_at":"2011/06/03 13:48:18 -0700","has_wiki":true,"open_issues":0,"created_at":"2011/05/06 14:42:18 -0700","fork":false,"has_issues":true,"description":"implementation of xproc in xquery","size":4744,"private":false,"name":"xprocxq","forks":1,"owner":"xquery","has_downloads":true,"homepage":""}]}
   </path>
 
 </app>

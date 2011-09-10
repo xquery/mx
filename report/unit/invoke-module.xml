@@ -1,1 +1,0 @@
-<tests xmlns:test="http://www.marklogic.com/test" name="Test controller "><test name="invoke main controller module"><expected>/mx-controller.xqy?mode=error&amp;url=</expected><result>/mx-controller.xqy?mode=error&amp;url=</result></test></tests>

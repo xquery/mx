@@ -1,1 +1,0 @@
-<tests name="test template rendering"><test name="test xslt template"><expected><html><body><h2>MX XSLT Template</h2><pre><data xmlns="http://www.marklogic.com/mx"/></pre></body></html></expected><result><html><body><h2>MX XSLT Template</h2><pre><data xmlns="http://www.marklogic.com/mx"/></pre></body></html></result></test></tests>

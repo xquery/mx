@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-	<connection protocol="http" host="localhost" port="9000" username="marklogic" password="marklogic"/>
-	<connection protocol="xdbc" host="localhost" port="9001" username="marklogic" password="marklogic"/>
-</config>
