@@ -39,7 +39,7 @@ Once you have a working MarkLogic HTTP application server running then;
 
     download mx (or get from git) distro
 
-    edit /mx-controller.xqy and change $mx:app to reflect your path
+    edit src/test-app/mx-controller.xqy and change $mx:app to reflect your path
 
         declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/test-app/app.xml'));
 
