@@ -142,12 +142,13 @@ Many of the principles embedded in MX were inspired by active/passive
 observations and conversations with some of my MarkLogic colleagues;
 
 Alex Beasdale
-Micah Dubinko
-Philip Fennel
-Nuno Job
-Justin Makeig
-Olav Schrewing
-Norman Walsh
+,Micah Dubinko
+,Philip Fennel
+,Nuno Job
+,Justin Makeig
+,Olav Schrewing
+,Pete Aven
+,Norman Walsh
 
 Though of course, I take all the blame for anything incorrect, broken or plain stupid.
 
