@@ -87,7 +87,9 @@
   </path>
  
   <!-- example templates (views) //-->
-  <path url="/template1" type="template" method="GET" content-type="text/html" data="/data7.test" description="">
+  <path url="/template1" type="template" method="GET"
+        content-type="text/html" data="/data7.test"
+        description="create template with mustache">
     <html>
       <head>
       </head>
