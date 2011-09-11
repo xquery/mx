@@ -31,7 +31,7 @@
 
               declare namespace xdmp = "http://marklogic.com/xdmp";
 
-              declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/test-app/app.xml'));
+              declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/example-app/app.xml'));
 
               &lt;tests name="test handle request functionality"&gt;
 
@@ -63,5 +63,12 @@
 	<p:with-option name="password" select="/connection/@password"/>
 	<p:with-option name="content-base" select="//*"/>
 	</ml:adhoc-query>
+<p:documentation>
+(:
+-- Local Variables:
+-- compile-command: "/usr/local/bin/calabash -isource=../config.xml -oresult=../report/request.xml request.xpl"
+-- End:
+:)
+</p:documentation>
 	
 </p:declare-step>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step 
 		xmlns:c="http://www.w3.org/ns/xproc-step"
 		xmlns:p="http://www.w3.org/ns/xproc"
 		xmlns:ml="http://xmlcalabash.com/ns/extensions/marklogic" 
-		xmlns:test="http://www.marklogic.com/test"
 		name="const"
 		version="1.0"
 		exclude-inline-prefixes="c ml p">
@@ -87,7 +85,10 @@
                 &lt;/test&gt;
 
                 &lt;test name="$mx:map should load into server-field"&gt;
-                  &lt;expected&gt;{xdmp:quote(mx:map( xdmp:document-get('/Users/jfuller/Source/Marklogic/framework-dist/src/test-app/app.xml')))}&lt;/expected&gt;
+                  &lt;expected&gt;{xdmp:quote(mx:map( 
+&lt;app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?"&gt;
+  &lt;path url="/resource/" type="passthru" description=""/&gt;
+&lt;/app&gt;))}&lt;/expected&gt;
                   &lt;result&gt;{xdmp:quote(mx:map(()))}&lt;/result&gt;
                 &lt;/test&gt;
 
@@ -95,15 +96,23 @@
             </query>
           </p:inline>
         </p:input>
-		<p:input port="parameters">
-			<p:empty/>
-		</p:input>
-		<p:with-option name="host" select="/connection/@host"/>
-		<p:with-option name="port" select="/connection/@port"/>
-		<p:with-option name="user" select="/connection/@username"/>
-		<p:with-option name="password" select="/connection/@password"/>
-		<p:with-option name="content-base" select="//*"/>
-
+	<p:input port="parameters">
+	  <p:empty/>
+	</p:input>
+	<p:with-option name="host" select="/connection/@host"/>
+	<p:with-option name="port" select="/connection/@port"/>
+	<p:with-option name="user" select="/connection/@username"/>
+	<p:with-option name="password" select="/connection/@password"/>
+	<p:with-option name="content-base" select="//*"/>
 	</ml:adhoc-query>
-	
+
+<p:documentation>
+(:
+-- Local Variables:
+-- compile-command: "/usr/local/bin/calabash -isource=../config.xml -oresult=../report/const.xml const.xpl"
+-- End:
+:)
+</p:documentation>
 </p:declare-step>
+
+

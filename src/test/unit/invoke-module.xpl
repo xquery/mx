@@ -66,4 +66,13 @@
 			<p:empty/>
 		</p:input>
 	</p:validate-with-schematron-->
+
+<p:documentation>
+(:
+-- Local Variables:
+-- compile-command: "/usr/local/bin/calabash -isource=../config.xml -oresult=../report/invoke-module.xml invoke-module.xpl"
+-- End:
+:)
+</p:documentation>
+
 </p:declare-step>

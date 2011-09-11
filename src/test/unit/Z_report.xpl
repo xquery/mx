@@ -33,4 +33,12 @@
 
     </p:xslt>
 
+<p:documentation>
+(:
+-- Local Variables:
+-- compile-command: "/usr/local/bin/calabash -isource=../config.xml -oresult=../report/const.xml Z_report.xpl"
+-- End:
+:)
+</p:documentation>
+
 </p:declare-step>
