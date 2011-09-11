@@ -7,10 +7,12 @@ please excuse the general unfinished state.
 
 The principles of MX in a nutshell;
 
+* KISS ... keep concepts simple and to a minimum, preferably one if possible
 * everything has a URI
 * simplify MVC by allowing everything to be a Model 
 * single import
-* create the minimum amount of framework and let developers do what they want
+* TMTOWTDI e.g. dont constrain developer wherever possible 
+
 
 ## Website
 
@@ -70,14 +72,13 @@ Once you have done the above you should be able to access the test-app
 
 ## Overview
 
+The best way to learn what MX does and how to build applications with
+it is to review app.xml
 
 *src/test-app/app.xml* - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
 why you need to use the url param flush=1 to force reload (if you add
 new changes or make a change to app.xml)
-
-The best way to learn what MX does and how to build applications with
-it is to review app.xml
 
 *passthru* - will allow HTTP requests through
 
