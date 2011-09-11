@@ -74,23 +74,25 @@ it is to review app.xml
 
 passthru - will allow HTTP requests through
 
+```xml
   <path url="/resource/" type="passthru" description=""/>
   <path url="/robots.txt" type="passthru" description=""/>
   <path url="/static-test.html" type="passthru" description=""/>
   <path url="/app.xml" type="passthru" description=""/>
-
+```
 
 http redirection - will either forward or redirect HTTP request
 
+```xml
   <path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
   <path url="/redirect.test" type="redirect" description="example of
                                                          redirecting,
                                                           changing the
                                                           url">/static-test.html</path>
-
+```
 
 inline tests - Shows how to 
-
+```xml
   <path url="/inline.test" method="GET">
     <html>
       <body>
@@ -98,9 +100,11 @@ inline tests - Shows how to
       </body>
     </html>
   </path>
+```
 
 data - how to setup models 
 
+```xml
   <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
     <data title="this is /data.test">
       <test>
@@ -108,16 +112,17 @@ data - how to setup models
       </test>
     </data>
   </path>
-
+```
 
 module - how to invoke xquery modules
 
+```xml
   <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
-
+```
 
 
 example templates (views) -
-
+```xml
   <path url="/template1" type="template" method="GET"
         content-type="text/html" data="/data7.test"
         description="create template with mustache">
@@ -129,7 +134,7 @@ example templates (views) -
       </body>
     </html>
   </path>
-
+```
 
 json - there are some experiemental json stuff as well
 
