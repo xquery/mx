@@ -34,14 +34,14 @@ https://github.com/dscape/mustache.xq
 
 ## Dist
 
-src/test-app - contains test application that uses mx.xqm
+src/example-app - contains test application that uses mx.xqm
 
 src/xquery - contains mx.xqm library and mx-controller.xqy
 
 tests -  there are tests for mx but I have opted to not include them
 in the dist for the time being
 
-## Installation of test-app
+## Installation of example-app
 
 You need to  ensure you have a MarkLogic database and application
 server setup. 
@@ -50,9 +50,9 @@ Once you have a working MarkLogic HTTP application server running then;
 
     download mx (or get from git) distro
 
-    edit src/test-app/mx-controller.xqy and change $mx:app to reflect your path
+    edit src/example-app/mx-controller.xqy and change $mx:app to reflect your path
 
-        declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/test-app/app.xml'));
+        declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/example-app/app.xml'));
 
     to
 
@@ -60,13 +60,13 @@ Once you have a working MarkLogic HTTP application server running then;
 
 In the ML application server set the following;
 
-    set root to where src/test-app is located in your environment
+    set root to where src/example-app is located in your environment
 
     set url rewriter to /mx-controller.xqy?mode=rewrite
 
     set error handler to /mx-controller.xqy?mode=error
 
-Once you have done the above you should be able to access the test-app
+Once you have done the above you should be able to access the example-app
 
     ex. http://localhost:9000/mx?flush=true
 
@@ -75,7 +75,7 @@ Once you have done the above you should be able to access the test-app
 The best way to learn what MX does and how to build applications with
 it is to review app.xml
 
-*src/test-app/app.xml* - defines all routing and how data and views come
+*src/example-app/app.xml* - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
 why you need to use the url param flush=1 to force reload (if you add
 new changes or make a change to app.xml)
