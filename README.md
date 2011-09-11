@@ -91,7 +91,8 @@ http redirection - will either forward or redirect HTTP request
                                                           url">/static-test.html</path>
 ```
 
-inline tests - Shows how to 
+inline tests - Shows how to generate static content
+
 ```xml
   <path url="/inline.test" method="GET">
     <html>
@@ -121,7 +122,8 @@ module - how to invoke xquery modules
 ```
 
 
-example templates (views) -
+example templates (views) - create templates which reuse data
+
 ```xml
   <path url="/template1" type="template" method="GET"
         content-type="text/html" data="/data7.test"
