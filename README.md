@@ -63,6 +63,7 @@ Once you have done the above you should be able to access the test-app
 
 ## Overview
 
+
 src/test-app/app.xml - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
 why you need to use the url param flush=1 to force reload (if you add
@@ -71,16 +72,67 @@ new changes or make a change to app.xml)
 The best way to learn what MX does and how to build applications with
 it is to review app.xml
 
-* passthru - will allow HTTP requests through
-* http redirection - will either forward or redirect HTTP request
-* inline tests - Shows how to 
-* data - how to setup models 
-* module - how to invoke xquery modules
-* example templates (views) -
-  /template1 - shows how to use mustache.xq and data model (/data7.test)
-  /template2 - shows how to use xslt template
-  /template3 - shows how to use xquery module to supply data to xslt transformation
-* json - there are some experiemental json stuff as well
+passthru - will allow HTTP requests through
+
+  <path url="/resource/" type="passthru" description=""/>
+  <path url="/robots.txt" type="passthru" description=""/>
+  <path url="/static-test.html" type="passthru" description=""/>
+  <path url="/app.xml" type="passthru" description=""/>
+
+
+http redirection - will either forward or redirect HTTP request
+
+  <path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
+  <path url="/redirect.test" type="redirect" description="example of
+                                                         redirecting,
+                                                          changing the
+                                                          url">/static-test.html</path>
+
+
+inline tests - Shows how to 
+
+  <path url="/inline.test" method="GET">
+    <html>
+      <body>
+        <h1>inline test</h1>
+      </body>
+    </html>
+  </path>
+
+data - how to setup models 
+
+  <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
+    <data title="this is /data.test">
+      <test>
+        <a>{1 + 1}</a>
+      </test>
+    </data>
+  </path>
+
+
+module - how to invoke xquery modules
+
+  <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
+
+
+
+example templates (views) -
+
+  <path url="/template1" type="template" method="GET"
+        content-type="text/html" data="/data7.test"
+        description="create template with mustache">
+    <html>
+      <head>
+      </head>
+      <body>
+        Hello {{text}}!
+      </body>
+    </html>
+  </path>
+
+
+json - there are some experiemental json stuff as well
+
 
 
 ## Using in your own XQuery Applications
@@ -105,6 +157,22 @@ appending the following url params to any url
 * debug=true - will display underlying XML and HTTP Request information
 * flush=true - will force app.xml to reload into server field
 
+
+## Tests
+
+Tests for mx are written in xproc contained under src/test/unit. To
+run tests you must setup an XDBC application server in ML and set
+configuration within src/test/config.xml
+
+<config>
+	<connection protocol="http" host="localhost" port="9002" username="test" password="test"/>
+	<connection protocol="xdbc" host="localhost" port="9001" username="test" password="test"/>
+</config>
+
+You will also require installing Norman Walsh's implementation of
+XProc XMLCalabash.
+
+To run tests review runner scripts under src/test/bin
 
 ## Resources
 

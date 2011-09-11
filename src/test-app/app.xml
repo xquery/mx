@@ -98,6 +98,20 @@
       </body>
     </html>
   </path>
+  <!-- example templates (views) //-->
+  <path url="/template1b" type="template" method="GET"
+        content-type="text/html" data="/xml.json"
+        description="create template with mustache">
+    <html>
+      <head>
+      </head>
+      <body>
+        Hello {{test}}!
+      </body>
+    </html>
+  </path>
+
+
   <path url="/template2" type="template" method="GET" content-type="text/html" data="/data.test" description="">
     <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <xsl:template match="*">
@@ -144,6 +158,12 @@
       <a type="string">test test</a>
     </json>
   </path>
+  <path url="/xml1.json" type="inline" content-type="text/plain"
+        method="GET" description="">
+   xdmp:to-json((<test>test</test>))
+  </path>
+
+
   <path url="/json.xml" type="inline" content-type="text/plain"
         convert="json2xml" method="GET" description="">
 {"repositories":[{"url":"https://github.com/xquery/xprocxq","watchers":2,"language":"XQuery","pushed_at":"2011/06/03 13:48:18 -0700","has_wiki":true,"open_issues":0,"created_at":"2011/05/06 14:42:18 -0700","fork":false,"has_issues":true,"description":"implementation of xproc in xquery","size":4744,"private":false,"name":"xprocxq","forks":1,"owner":"xquery","has_downloads":true,"homepage":""}]}
