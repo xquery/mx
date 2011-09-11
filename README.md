@@ -63,8 +63,14 @@ Once you have done the above you should be able to access the test-app
 
 ## Overview
 
+The principles of MX in a nutshell;
 
-src/test-app/app.xml - defines all routing and how data and views come
+* everything has a URI
+* simplify MVC by allowing everything to be a Model 
+* make it easy to 
+* create the minimum amount of framework and let developers do what they want
+
+*src/test-app/app.xml* - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
 why you need to use the url param flush=1 to force reload (if you add
 new changes or make a change to app.xml)
@@ -72,16 +78,16 @@ new changes or make a change to app.xml)
 The best way to learn what MX does and how to build applications with
 it is to review app.xml
 
-passthru - will allow HTTP requests through
+*passthru* - will allow HTTP requests through
 
 ```xml
-  <path url="/resource/" type="passthru" description=""/>
-  <path url="/robots.txt" type="passthru" description=""/>
-  <path url="/static-test.html" type="passthru" description=""/>
-  <path url="/app.xml" type="passthru" description=""/>
+<path url="/resource/" type="passthru" description=""/>
+<path url="/robots.txt" type="passthru" description=""/>
+<path url="/static-test.html" type="passthru" description=""/>
+<path url="/app.xml" type="passthru" description=""/>
 ```
 
-http redirection - will either forward or redirect HTTP request
+*http redirection* - will either forward or redirect HTTP request
 
 ```xml
   <path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
@@ -91,7 +97,7 @@ http redirection - will either forward or redirect HTTP request
                                                           url">/static-test.html</path>
 ```
 
-inline tests - Shows how to generate static content
+*inline tests* - Shows how to generate static content
 
 ```xml
   <path url="/inline.test" method="GET">
@@ -103,7 +109,7 @@ inline tests - Shows how to generate static content
   </path>
 ```
 
-data - how to setup models 
+*data* - how to setup models  (but remember everything is a model)
 
 ```xml
   <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
@@ -115,14 +121,14 @@ data - how to setup models
   </path>
 ```
 
-module - how to invoke xquery modules
+*module* - how to invoke xquery modules
 
 ```xml
   <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
 ```
 
 
-example templates (views) - create templates which reuse data
+*templates* - create templates which reuse data
 
 ```xml
   <path url="/template1" type="template" method="GET"
@@ -138,8 +144,7 @@ example templates (views) - create templates which reuse data
   </path>
 ```
 
-json - there are some experiemental json stuff as well
-
+*json* - there are some experiemental json stuff as well
 
 
 ## Using in your own XQuery Applications
