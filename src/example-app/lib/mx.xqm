@@ -141,7 +141,7 @@ declare function mx:handle-debug($req as element(mx:request),$app-map as map:map
 (: -------------------------------------------------------------------------------------------------------- :)
 <mx:debug xdmp-request="{xdmp:request()}">
     {$req}
-    {if($mx:cache-flag) then xdmp:query-meters() else ()}
+    {if($mx:profile-flag) then xdmp:query-meters() else ()}
 </mx:debug>
 };
 
