@@ -175,20 +175,21 @@ appending the following url params to any url
   information
 
 ```
-http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+http://localhost:9000/inline.test?debug=true
 ```
 
 * profile=true - will enable profiling information to be included in
   debug 
 
 ```
-http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+http://localhost:9000/inline.test?profile=true&debug=true
 ```
 
-* flush=true   - will force app.xml to reload into server field
+* flush=true   - will force app.xml to reload into server field which
+  is required anytime you edit app.xml.
 
 ```
-http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+http://localhost:9000/inline.test?flush=true
 ```
 
 * cache=true   - will enable inline function caching
