@@ -5,6 +5,13 @@ MX is designed to provide a 'starting point' for developing MarkLogic XQuery web
 It is a 'work in progress' and a testbed for trying out things, so
 please excuse the general unfinished state.
 
+The principles of MX in a nutshell;
+
+* everything has a URI
+* simplify MVC by allowing everything to be a Model 
+* single import
+* create the minimum amount of framework and let developers do what they want
+
 ## Website
 
 'sparse' documentation and source code can always be found from the MX github repo
@@ -63,12 +70,6 @@ Once you have done the above you should be able to access the test-app
 
 ## Overview
 
-The principles of MX in a nutshell;
-
-* everything has a URI
-* simplify MVC by allowing everything to be a Model 
-* make it easy to 
-* create the minimum amount of framework and let developers do what they want
 
 *src/test-app/app.xml* - defines all routing and how data and views come
 together. Note that this is loaded into an ML server field which is
@@ -90,58 +91,58 @@ it is to review app.xml
 *http redirection* - will either forward or redirect HTTP request
 
 ```xml
-  <path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
-  <path url="/redirect.test" type="redirect" description="example of
-                                                         redirecting,
-                                                          changing the
-                                                          url">/static-test.html</path>
+<path url="/forward.test" type="forward" description="example of forwarding">/static-test.html</path>
+<path url="/redirect.test" type="redirect" description="example of
+redirecting,
+changing the
+url">/static-test.html</path>
 ```
 
 *inline tests* - Shows how to generate static content
 
 ```xml
-  <path url="/inline.test" method="GET">
-    <html>
-      <body>
-        <h1>inline test</h1>
-      </body>
-    </html>
-  </path>
+<path url="/inline.test" method="GET">
+<html>
+<body>
+<h1>inline test</h1>
+</body>
+</html>
+</path>
 ```
 
 *data* - how to setup models  (but remember everything is a model)
 
 ```xml
-  <path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
-    <data title="this is /data.test">
-      <test>
-        <a>{1 + 1}</a>
-      </test>
-    </data>
-  </path>
+<path url="/data.test" method="GET" description="inline test with no content type set, should fall back to using application/xml">
+<data title="this is /data.test">
+<test>
+<a>{1 + 1}</a>
+</test>
+</data>
+</path>
 ```
 
 *module* - how to invoke xquery modules
 
 ```xml
-  <path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
+<path url="/xquery.test" method="GET" href="/modules/example.xqy"/>
 ```
 
 
 *templates* - create templates which reuse data
 
 ```xml
-  <path url="/template1" type="template" method="GET"
-        content-type="text/html" data="/data7.test"
-        description="create template with mustache">
-    <html>
-      <head>
-      </head>
-      <body>
-        Hello {{text}}!
-      </body>
-    </html>
-  </path>
+<path url="/template1" type="template" method="GET"
+content-type="text/html" data="/data7.test"
+description="create template with mustache">
+<html>
+<head>
+</head>
+<body>
+Hello {{text}}!
+</body>
+</html>
+</path>
 ```
 
 *json* - there are some experiemental json stuff as well
