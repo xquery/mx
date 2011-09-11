@@ -66,6 +66,9 @@ In the ML application server set the following;
 
     set error handler to /mx-controller.xqy?mode=error
 
+    you may have to set user with correct privileges depending on your
+    setup
+
 Once you have done the above you should be able to access the example-app
 
     ex. http://localhost:9000/mx?flush=true
