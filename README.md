@@ -171,10 +171,33 @@ however way you want your modules, templates, etc.
 
 appending the following url params to any url 
 
-* debug=true   - will display underlying XML and HTTP Request information
-* profile=true - will enable profiling information to be included in debug 
+* debug=true   - will display underlying XML and HTTP Request
+  information
+
+```
+http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+```
+
+* profile=true - will enable profiling information to be included in
+  debug 
+
+```
+http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+```
+
 * flush=true   - will force app.xml to reload into server field
+
+```
+http://localhost:9000/inline.test?flush=true&profile=true&debug=true
+```
+
 * cache=true   - will enable inline function caching
+
+```
+http://localhost:9000/inline.test?cache=true
+```
+
+
 
 ## Tests
 
