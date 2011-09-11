@@ -163,7 +163,7 @@ appending the following url params to any url
 
 * debug=true - will display underlying XML and HTTP Request information
 * flush=true - will force app.xml to reload into server field
-
+* cache=true - will enable inline function caching
 
 ## Tests
 
