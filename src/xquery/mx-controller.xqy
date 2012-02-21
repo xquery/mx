@@ -1,12 +1,37 @@
 xquery version "1.0-ml" encoding "utf-8";
 
 (: -------------------------------------------------------------------------------------------------------- :)
-import module namespace mx = "http://www.marklogic.com/mx" at "/lib/mx.xqm";
-
+import module namespace mx = "http://www.marklogic.com/mx" at "/lib/mx-0.1/mx.xqm";
 (: -------------------------------------------------------------------------------------------------------- :)
 
 (: load up app.xml:)
-declare variable $mx:app := mx:map( xdmp:document-get('/Users/jfuller/Source/Webcomposite/mx/src/test-app/app.xml'));
+declare variable $mx:app := mx:map(
+<app xmlns="http://www.marklogic.com/mx" xmlns:mx="http://www.marklogic.com/mx" default-context="?">
+
+  <!-- passthru  //-->
+  <path url="/resource/" type="passthru" description=""/>
+  <path url="/robots.txt" type="passthru" description=""/>
+
+  <path url="/inline.test" method="GET">
+    <html>
+      <body>
+        <h1>inline test</h1>
+      </body>
+    </html>
+  </path>
+  <path url="/inline4.test" type="inline" content-type="text/html" method="GET"
+        description="show embedded xquery">
+    <html>
+      <body>
+        <h1>inline test</h1>
+        <p>{fn:current-time()}</p>
+      </body>
+    </html>
+  </path>
+
+</app>
+
+);
 
 (: -------------------------------------------------------------------------------------------------------- :)
 if( $mx:mode eq 'rewrite' ) then              

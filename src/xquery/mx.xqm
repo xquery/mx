@@ -10,11 +10,12 @@ declare namespace xsl="http://www.w3.org/1999/XSL/Transform";
 (: prolog, options :)
 declare copy-namespaces no-preserve, no-inherit;
 declare option xdmp:mapping "true";
+declare option xdmp:update "true";
 
 (: config :)
 declare variable $mx:controller-path      as xs:string := '/mx-controller.xqy';
 declare variable $mx:mustache-path        as xs:string := '/lib/mustache.xq/mustache.xq';
-declare variable $mx:mljson-path        as xs:string := '/lib/mljson/lib/json.xqy';
+declare variable $mx:mljson-path          as xs:string := '/lib/mljson/lib/json.xqy';
 declare variable $mx:default-content-type as xs:string := 'application/xml';
 declare variable $mx:default-type         as xs:string := 'inline';
     
@@ -22,16 +23,16 @@ declare variable $mx:default-type         as xs:string := 'inline';
 declare variable $mx:mode as xs:string := xdmp:get-request-field('mode','rewrite');
 
 (: assertions, logging :)
-declare variable $mx:LOG-LEVEL as xs:string  := "fine";
+declare variable $mx:LOG-LEVEL as xs:string  := "info";
 declare variable $mx:log-flag  as xs:boolean := fn:true(); 
 declare variable $mx:assert    as xs:boolean := fn:true();
 
 (: flags - to permanantly disable any of these behaviors set to fn:false() :)
-declare variable $mx:flush-flag   as xs:boolean := ((xdmp:get-request-field('flush') eq 'true'),fn:true())[1]; 
+declare variable $mx:flush-flag   as xs:boolean := (fn:true())[1]; 
 declare variable $mx:debug-flag   as xs:boolean := ((xdmp:get-request-field('debug') eq 'true'),fn:false())[1]; 
 declare variable $mx:profile-flag as xs:boolean := ((xdmp:get-request-field('profile') eq 'true'),fn:false())[1];  
 declare variable $mx:doc-flag     as xs:boolean := ((xdmp:get-request-field('doc') eq 'true'),fn:false())[1]; 
-declare variable $mx:cache-flag   as xs:boolean := ((xdmp:get-request-field('cache') eq 'true'),fn:true())[1];  
+declare variable $mx:cache-flag   as xs:boolean := ((xdmp:get-request-field('cache') eq 'true'),fn:false())[1];  
 
 (: HOX :)
 declare variable $mx:handle-response := xdmp:function(xs:QName('mx:handle-response'));
@@ -132,7 +133,7 @@ declare function mx:dispatch($req,$match) as item()* {
         else
           xdmp:apply( $mx:mustache, xdmp:quote($match/node()), xdmp:quote(mx:data($model,$req/*:params/*)))
       else if ($href ne '' and $match/*:arg and fn:contains($href,'#')) then
-        mx:invoke($href,for $arg in $match/*:arg return $arg/node(), $ns)
+        mx:invoke($href,for $arg in $match/*:arg return xdmp:eval($arg/node()), $ns)
       else if ($href ne '') then
         mx:invoke($href,for $arg in $match/*:arg return $arg/node())
       else if ($type eq '' or $type eq 'inline') then
@@ -231,9 +232,9 @@ return
   else if ($arity eq 3) then
     xdmp:apply( $function, $vars[1], $vars[2], $vars[3])
   else if ($arity eq 4) then
-    xdmp:apply( $function, $vars[1], $vars[2], $vars[3], $vars[4])
+    xdmp:apply( $function, $vars[1],  $vars[2], $vars[3], $vars[4])
   else if ($arity eq 5) then
-    xdmp:apply( $function, $vars[1], $vars[2], $vars[3], $vars[4], $vars[5])
+    xdmp:apply( $function, $vars[1],  $vars[2], $vars[3], $vars[4], $vars[5])
   else
     ()
 };
@@ -424,10 +425,24 @@ declare function mx:data($path as xs:string, $params as item()*) as item()*{
 declare function mx:eval($query as xs:string){
 (: -------------------------------------------------------------------------------------------------------- :)
  let $preamble := 'import module namespace mx = "http://www.marklogic.com/mx" at 
-              "/lib/mx.xqm";
+              "/lib/mx-0.1/mx.xqm";
     import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
     
-              declare namespace xdmp = "http://marklogic.com/xdmp";
+    import module namespace usermodule = "http://www.marklogic.com/usermodule" at "/lib/usermodule-0.1/usermodule.xqy";
+
+    import module namespace config="http://depx.org/config" at "/lib/config.xqm";
+
+    import module namespace packages = "http://depx.org/packages" at "/modules/packages/model.xqm";
+
+    import module namespace reviews = "http://depx.org/meta/reviews" at "/modules/reviews/model.xqm";
+
+    import module namespace downloads = "http://depx.org/meta/downloads" at "/modules/downloads/model.xqm";
+
+    import module namespace rankings = "http://depx.org/meta/rankings" at "/modules/rankings/model.xqm";
+
+    import module namespace user = "http://depx.org/user" at "/modules/user/model.xqm";
+
+    declare namespace xdmp = "http://marklogic.com/xdmp";
               '
 return
   xdmp:eval(fn:concat($preamble,$query))
