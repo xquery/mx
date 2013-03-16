@@ -1,3 +1,7 @@
+#IMPORTANT (mx is deprecated)
+
+Goto [[RXQ - RESTXQ Annotations for building RESTful web applications][https://github.com/xquery/rxq]
+
 # MarkLogic XQuery framework (mx)
 
 MX is designed to provide a 'starting point' for developing MarkLogic XQuery web applications.
