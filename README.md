@@ -1,6 +1,6 @@
 #IMPORTANT (mx is deprecated)
 
-Goto (RXQ - RESTXQ Annotations for building RESTful web applications)[https://github.com/xquery/rxq]
+Goto [RXQ - RESTXQ Annotations for building RESTful web applications](https://github.com/xquery/rxq)
 
 # MarkLogic XQuery framework (mx)
 
